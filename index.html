@@ -1,0 +1,1507 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lenkstern · föderative Plattform für die Zeit nach der Reha</title>
+<meta name="description" content="Lenkstern e.V. (i. Gr.) baut eine föderative, EU-souveräne Plattform für die Generationen, die nach der Reha ihren Alltag neu zusammenschrauben. Sieben Module, ein Horizont." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Vorspannung — Dachverband / Lenkstern */
+    --indigo-bg:    #010a1e;
+    --indigo-card:  #0f172a;
+    --indigo-surf:  #1e2937;
+    --indigo-border:#334155;
+    --indigo-muted: #64748b;
+    --indigo-fg:    #e0e7ff;
+    --indigo-fg-2:  #f1f5f9;
+    --plasma:       #ff5a00;
+    --plasma-soft:  #FFB180;
+    --plasma-deep:  #c2410c;
+
+    /* Module accent colors (palette accents) */
+    --c-kern:      #00e5d8;
+    --c-shg:       #38bdf8;
+    --c-therapie:  #14b8a6;
+    --c-reha:      #b87333;
+    --c-community: #0ea5e9;
+    --c-markt:     #f59e0b;
+
+    --maxw: 1280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body {
+    background: var(--indigo-bg);
+    color: var(--indigo-fg);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    font-feature-settings: "ss01", "cv11";
+    min-height: 100vh;
+  }
+  ::selection { background: var(--plasma); color: #fff; }
+
+  a { color: inherit; text-decoration: none; }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .uc { text-transform: uppercase; letter-spacing: 0.14em; }
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+
+  /* ====================================
+     Heartbeat — slow, calming (10s cycle)
+     Neon glow pulses, outline stays static
+     ==================================== */
+  @keyframes hb-pulse {
+    0%   { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
+    8%   { filter: drop-shadow(0 0 24px rgba(255,170,80,1)) drop-shadow(0 0 56px rgba(255,110,20,0.85)) drop-shadow(0 0 110px rgba(255,90,0,0.55)) drop-shadow(0 0 180px rgba(255,90,0,0.30)); }
+    18%  { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
+    26%  { filter: drop-shadow(0 0 18px rgba(255,150,60,0.85)) drop-shadow(0 0 42px rgba(255,100,10,0.60)) drop-shadow(0 0 78px rgba(255,90,0,0.34)); }
+    36%  { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
+    100% { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
+  }
+  @keyframes hb-aura {
+    0%, 100% { opacity: 0.30; }
+    8%       { opacity: 1; }
+    18%      { opacity: 0.30; }
+    26%      { opacity: 0.75; }
+    36%      { opacity: 0.30; }
+  }
+  .pulse {
+    animation: hb-pulse 10000ms ease-in-out infinite;
+    will-change: filter;
+  }
+  .aura {
+    animation: hb-aura 10000ms ease-in-out infinite;
+    will-change: opacity;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pulse, .aura { animation: none !important; }
+  }
+
+  /* ====================================
+     Top nav
+     ==================================== */
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--indigo-bg) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in srgb, var(--indigo-border) 60%, transparent);
+  }
+  .top-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 0;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .brand-mark {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--plasma);
+  }
+  .brand-mark svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .brand-word {
+    font-size: 19px; font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--indigo-fg-2);
+  }
+  .brand-word .ev {
+    color: var(--indigo-muted);
+    font-weight: 400;
+    margin-left: 6px;
+  }
+
+  nav.primary {
+    display: flex; align-items: center; gap: 28px;
+    font-size: 15px;
+    color: #cbd5e1;
+  }
+  nav.primary a { padding: 6px 0; position: relative; }
+  nav.primary a:hover { color: var(--indigo-fg-2); }
+  nav.primary .cta {
+    padding: 10px 18px;
+    border: 1px solid var(--plasma);
+    border-radius: 999px;
+    color: var(--plasma);
+    font-weight: 500;
+    transition: background .15s ease, color .15s ease;
+  }
+  nav.primary .cta:hover { background: var(--plasma); color: #fff; }
+  @media (max-width: 760px) {
+    nav.primary .hide-sm { display: none; }
+  }
+
+  /* ====================================
+     Hero
+     ==================================== */
+  section.hero {
+    position: relative;
+    padding: clamp(72px, 11vw, 152px) 0 clamp(64px, 8vw, 112px);
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+    max-width: 64ch;
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--plasma-soft);
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--plasma);
+    box-shadow: 0 0 14px rgba(255,90,0,0.6);
+  }
+
+  h1.hero-h {
+    font-size: clamp(40px, 6.4vw, 88px);
+    line-height: 1.02;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    color: var(--indigo-fg-2);
+    text-wrap: balance;
+    max-width: 20ch;
+  }
+  h1.hero-h .accent { color: var(--plasma); }
+
+  .lede {
+    font-size: clamp(17px, 1.55vw, 21px);
+    line-height: 1.55;
+    color: #94a3b8;
+    margin-top: 36px;
+    max-width: 44ch;
+    text-wrap: pretty;
+  }
+
+  .hero-ctas {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    margin-top: 44px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 24px;
+    border-radius: 10px;
+    font-size: 16px; font-weight: 500;
+    letter-spacing: 0.005em;
+    border: 1px solid transparent;
+    transition: transform .12s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn--primary {
+    background: var(--plasma); color: #fff;
+  }
+  .btn--primary:hover { background: #e85100; }
+  .btn--ghost {
+    background: transparent;
+    color: var(--indigo-fg-2);
+    border-color: var(--indigo-border);
+  }
+  .btn--ghost:hover { border-color: var(--plasma-soft); color: var(--plasma-soft); }
+  .btn .arrow { font-family: 'IBM Plex Mono', monospace; opacity: 0.8; }
+
+  /* Hero mark / aura */
+  .hero-mark-wrap {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 380px;
+  }
+  .hero-mark-aura {
+    position: absolute;
+    width: 150%; aspect-ratio: 1/1; border-radius: 50%;
+    background:
+      radial-gradient(circle, rgba(255,150,60,0.55) 0%, rgba(255,90,0,0.30) 24%, rgba(255,90,0,0.10) 48%, transparent 70%);
+    filter: blur(12px);
+  }
+  .hero-mark {
+    position: relative;
+    width: min(60%, 360px);
+    aspect-ratio: 1 / 1;
+    color: var(--plasma);
+  }
+  .hero-mark svg {
+    width: 100%; height: 100%; display: block; overflow: visible;
+  }
+
+  /* Hero meta strip beneath */
+  .hero-meta {
+    margin-top: clamp(48px, 6vw, 72px);
+    display: flex; flex-wrap: wrap; gap: 28px 56px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 60%, transparent);
+    padding-top: 28px;
+  }
+  .hero-meta dt {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--indigo-muted);
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+  .hero-meta dd { color: var(--indigo-fg-2); font-size: 15px; }
+  .hero-meta .row { min-width: 160px; }
+
+  /* ====================================
+     Was ist Lenkstern
+     ==================================== */
+  .was-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(40px, 6vw, 88px);
+    align-items: center;
+    margin-top: 24px;
+  }
+  @media (max-width: 880px) { .was-grid { grid-template-columns: 1fr; } }
+
+  .was-body {
+    margin-top: 22px;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.55;
+    color: var(--indigo-fg);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+
+  .was-mark-stage {
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 320px;
+  }
+  .was-mark-aura {
+    position: absolute;
+    width: 110%; aspect-ratio: 1/1; border-radius: 50%;
+    background:
+      radial-gradient(circle, rgba(255,150,60,0.45) 0%, rgba(255,90,0,0.22) 28%, transparent 65%);
+    filter: blur(10px);
+    z-index: 0;
+  }
+  .was-mark {
+    position: relative; z-index: 1;
+    width: 220px; aspect-ratio: 1/1;
+    color: var(--plasma);
+  }
+  .was-mark svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .was-caption {
+    position: relative; z-index: 1;
+    margin-top: 28px;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--indigo-muted);
+  }
+
+  /* Palette explain */
+  .palette-explain {
+    margin-top: clamp(48px, 6vw, 80px);
+    padding-top: 40px;
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 50%, transparent);
+  }
+  .palette-explain-head { max-width: 70ch; }
+  .section-label.small {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    margin-bottom: 18px;
+  }
+  .palette-h {
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    color: var(--indigo-fg-2);
+    max-width: 28ch;
+    text-wrap: balance;
+  }
+  .palette-sub {
+    margin-top: 14px;
+    font-size: 16px; line-height: 1.55;
+    color: #94a3b8;
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+  .palette-grid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1080px) { .palette-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px)  { .palette-grid { grid-template-columns: 1fr; } }
+  .palette-card {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--indigo-border);
+    background: rgba(15,23,42,0.45);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .palette-card:hover {
+    border-color: color-mix(in srgb, var(--c, var(--plasma)) 55%, var(--indigo-border));
+    background: rgba(255,255,255,0.025);
+  }
+  .palette-swatch {
+    width: 44px; height: 44px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--c, var(--plasma));
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.12),
+      0 0 18px -2px color-mix(in srgb, var(--c, var(--plasma)) 60%, transparent);
+  }
+  .palette-name {
+    font-size: 17px; font-weight: 500;
+    color: var(--indigo-fg-2);
+    letter-spacing: -0.012em;
+    line-height: 1.15;
+  }
+  .palette-role {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+  .palette-hex {
+    font-size: 11px;
+    color: var(--indigo-muted);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+  }
+  section.block {
+    padding: clamp(56px, 7vw, 96px) 0;
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 50%, transparent);
+  }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--plasma-soft);
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .section-label::before {
+    content: ''; width: 8px; height: 8px;
+    background: var(--plasma); border-radius: 999px;
+  }
+  h2.section-h {
+    font-size: clamp(30px, 3.6vw, 48px);
+    line-height: 1.08;
+    font-weight: 500;
+    letter-spacing: -0.022em;
+    color: var(--indigo-fg-2);
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .section-sub {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: #94a3b8;
+    margin-top: 18px;
+    max-width: 58ch;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  /* ====================================
+     Modules
+     ==================================== */
+  .modules {
+    margin-top: 56px;
+    border-radius: 16px;
+    border: 1.5px solid color-mix(in srgb, var(--plasma) 36%, rgba(255,255,255,0.12));
+    background: rgba(255,255,255,0.02);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--plasma) 14%, transparent),
+      0 0 80px -10px color-mix(in srgb, var(--plasma) 32%, transparent),
+      0 24px 64px -24px rgba(0,0,0,0.55);
+    overflow: hidden;
+  }
+  /* Modules row layout */
+  .module {
+    display: grid;
+    grid-template-columns: 180px 1fr 260px 200px;
+    gap: 24px;
+    align-items: center;
+    padding: 22px clamp(20px, 3vw, 32px);
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 35%, transparent);
+    transition: background .15s ease;
+  }
+  .module:first-child { border-top: none; }
+  .module:hover {
+    background: rgba(255,90,0,0.04);
+  }
+  .module-codename {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 22px; font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--indigo-fg-2);
+  }
+  .module-codename .swatch {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: var(--c, var(--plasma));
+    box-shadow: 0 0 14px var(--c, var(--plasma));
+  }
+  .module-desc {
+    font-size: 16px; color: #94a3b8; line-height: 1.5;
+    text-wrap: pretty;
+  }
+  .module-host {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    color: #cbd5e1;
+  }
+  .module-host .sub { color: var(--plasma); }
+  /* Pills — unified clean look, all same width, right-aligned in a column */
+  .module-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: 1px solid var(--indigo-border);
+    color: var(--indigo-fg-2);
+    border-radius: 999px;
+    justify-self: end;
+    white-space: nowrap;
+    background: rgba(15,23,42,0.55);
+    display: inline-flex; align-items: center; gap: 8px;
+    width: 200px; justify-content: center;
+    box-sizing: border-box;
+  }
+  .module-status::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 999px;
+    background: var(--indigo-muted);
+  }
+  .module-status.pilot::before { background: var(--plasma); box-shadow: 0 0 10px rgba(255,90,0,0.8); }
+  .module-status.now::before   { background: var(--c-kern); box-shadow: 0 0 10px rgba(0,229,216,0.8); animation: live-blink 1.6s ease-in-out infinite; }
+  @keyframes live-blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+  }
+  @media (max-width: 880px) {
+    .module {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "name status"
+        "host status"
+        "desc desc";
+      gap: 8px 16px;
+    }
+    .module-codename  { grid-area: name; }
+    .module-host      { grid-area: host; }
+    .module-desc      { grid-area: desc; padding-top: 6px; }
+    .module-status    { grid-area: status; align-self: start; }
+  }
+
+  /* ====================================
+     Haltung header layout (text + Germany shield)
+     ==================================== */
+  .haltung-head {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: clamp(28px, 4vw, 64px);
+    align-items: center;
+  }
+  @media (max-width: 760px) { .haltung-head { grid-template-columns: 1fr; } }
+
+  .trust-shield-wrap {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .trust-shield-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12%;
+    background: radial-gradient(circle, rgba(255,90,0,0.20) 0%, rgba(255,90,0,0.08) 35%, rgba(56,189,248,0.06) 70%, transparent 90%);
+    filter: blur(20px);
+    z-index: 0;
+    border-radius: 24px;
+  }
+  .trust-image {
+    position: relative; z-index: 1;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 14px;
+    display: block;
+    box-shadow:
+      0 0 0 1px rgba(255,90,0,0.20),
+      0 20px 48px -16px rgba(0,0,0,0.7),
+      0 0 60px -12px rgba(255,90,0,0.18);
+    mix-blend-mode: screen;
+    filter: saturate(0.78) hue-rotate(-8deg) contrast(1.05) brightness(1.02);
+  }
+  @media (max-width: 760px) {
+    .trust-shield-wrap { justify-content: flex-start; }
+    .trust-image { max-width: 240px; }
+  }
+
+  /* ====================================
+     Haltung (Doctrine)
+     ==================================== */
+  /* Doctrine container — minimal, lets cards breathe */
+  .doctrine {
+    margin-top: 40px;
+    padding: 0;
+    background: none;
+    border: none;
+    position: relative;
+  }
+  .doctrine::before { content: none; }
+  .doctrine-statement {
+    font-family: 'IBM Plex Serif', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--indigo-fg-2);
+    text-wrap: balance;
+  }
+  .doctrine-statement b {
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--plasma);
+  }
+  .doctrine-why {
+    margin-top: 28px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #94a3b8;
+    max-width: 70ch;
+    text-wrap: pretty;
+  }
+  .doctrine-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 8px;
+  }
+  @media (max-width: 760px) { .doctrine-list { grid-template-columns: 1fr; } }
+  .doctrine-item {
+    padding: clamp(28px, 3.2vw, 40px);
+    border: 1px solid var(--indigo-border);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(2,6,23,0.55) 100%);
+    display: flex; flex-direction: column;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .doctrine-item:hover {
+    border-color: color-mix(in srgb, var(--plasma) 35%, var(--indigo-border));
+    transform: translateY(-2px);
+  }
+  .doctrine-item h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: clamp(20px, 1.9vw, 24px);
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    color: var(--indigo-fg-2);
+    text-transform: none;
+    margin-bottom: 18px;
+    text-wrap: balance;
+  }
+  .doctrine-item p {
+    font-size: clamp(15px, 1.25vw, 17px);
+    line-height: 1.6;
+    color: #cbd5e1;
+    text-wrap: pretty;
+  }
+  .doctrine-item p b { color: var(--plasma-soft); font-weight: 500; }
+
+  .doctrine-sub-label {
+    margin-top: 48px;
+    margin-bottom: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--plasma-soft);
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .doctrine-sub-label::before {
+    content: ''; width: 24px; height: 1px;
+    background: var(--plasma);
+  }
+
+  /* Love stamp */
+  .love-stamp {
+    margin-top: 36px;
+    display: inline-flex; align-items: center; gap: 10px;
+    flex-wrap: wrap;
+    padding: 12px 20px;
+    border: 1px solid color-mix(in srgb, var(--plasma) 45%, var(--indigo-border));
+    border-radius: 999px;
+    background: rgba(255,90,0,0.06);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--plasma-soft);
+  }
+  .love-stamp b { color: var(--plasma); font-weight: 500; }
+  .love-stamp .sep { color: var(--indigo-muted); }
+  .ls-heart, .ls-heart-inline {
+    display: inline-flex; align-items: center; justify-content: center;
+    filter: drop-shadow(0 0 6px rgba(255,90,0,0.6));
+    animation: heart-beat 1.4s ease-in-out infinite;
+  }
+  .flag {
+    display: inline-flex; align-items: center;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.18);
+  }
+  .flag svg { display: block; }
+  @keyframes heart-beat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.18); }
+    28% { transform: scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ls-heart, .ls-heart-inline { animation: none !important; }
+  }
+
+  /* ====================================
+     Rechtstrennung table
+     ==================================== */
+  .rt-grid {
+    margin-top: 48px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--indigo-border);
+  }
+  .rt-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1.4fr 1.2fr 1.5fr;
+    gap: 24px;
+    padding: 18px clamp(18px, 2.4vw, 28px);
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 70%, transparent);
+    align-items: start;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #cbd5e1;
+  }
+  .rt-row:first-child { border-top: none; }
+  .rt-head {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--plasma-soft);
+    background: rgba(255,90,0,0.05);
+    padding-top: 14px; padding-bottom: 14px;
+  }
+  .rt-mod {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 8px 12px;
+    color: var(--indigo-fg-2);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.005em;
+  }
+  .rt-mod .dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    box-shadow: 0 0 10px currentColor;
+  }
+  .rt-host {
+    color: var(--indigo-muted);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    width: 100%;
+  }
+  @media (max-width: 880px) {
+    .rt-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 22px;
+    }
+    .rt-head { display: none; }
+    .rt-row > div:not(.rt-mod)::before {
+      content: attr(data-k);
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--indigo-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Infrastructure strip */
+  .infra-strip {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--indigo-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(15,23,42,0.45);
+  }
+  .infra-item {
+    padding: 22px clamp(16px, 2vw, 24px);
+    border-right: 1px solid color-mix(in srgb, var(--indigo-border) 65%, transparent);
+  }
+  .infra-item:last-child { border-right: none; }
+  .infra-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--plasma-soft); margin-bottom: 10px;
+  }
+  .infra-val {
+    font-size: 16px;
+    color: var(--indigo-fg-2);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+  }
+  .infra-val .mono {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--indigo-muted);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 880px) {
+    .infra-strip { grid-template-columns: 1fr 1fr; }
+    .infra-item { border-right: 1px solid color-mix(in srgb, var(--indigo-border) 65%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--indigo-border) 65%, transparent); }
+    .infra-item:nth-child(2n) { border-right: none; }
+    .infra-item:nth-last-child(-n+1) { border-bottom: none; }
+  }
+  @media (max-width: 540px) {
+    .infra-strip { grid-template-columns: 1fr; }
+    .infra-item { border-right: none; }
+  }
+
+  /* ====================================
+     Warum jetzt
+     ==================================== */
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+  }
+  @media (max-width: 880px) { .why-grid { grid-template-columns: 1fr; } }
+  .why-card {
+    padding: 28px;
+    border-top: 1px solid var(--indigo-border);
+    display: flex; flex-direction: column;
+  }
+  .why-card .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--plasma); margin-bottom: 22px;
+  }
+  .why-card h3 {
+    font-size: 24px; line-height: 1.15; font-weight: 500;
+    letter-spacing: -0.012em;
+    color: var(--indigo-fg-2);
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .why-card p {
+    font-size: 15px; line-height: 1.55;
+    color: #94a3b8;
+    text-wrap: pretty;
+  }
+
+  /* ====================================
+     Stand / Roadmap timeline
+     ==================================== */
+  .timeline {
+    margin-top: 48px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--indigo-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  @media (max-width: 880px) { .timeline { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .timeline { grid-template-columns: 1fr; } }
+  .tl {
+    padding: 24px 22px;
+    border-right: 1px solid var(--indigo-border);
+    background: rgba(15,23,42,0.5);
+  }
+  .tl:last-child { border-right: none; }
+  @media (max-width: 880px) {
+    .tl:nth-child(2) { border-right: none; }
+    .tl:nth-child(1), .tl:nth-child(2) { border-bottom: 1px solid var(--indigo-border); }
+  }
+  .tl .when {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--plasma-soft);
+    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .tl .when .dot {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--plasma);
+  }
+  .tl.live .when .dot {
+    background: #00e5d8;
+    box-shadow: 0 0 12px rgba(0,229,216,0.7);
+    animation: live-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  .tl .what {
+    font-size: 17px; line-height: 1.3; font-weight: 500;
+    color: var(--indigo-fg-2);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .tl .note {
+    font-size: 13px; line-height: 1.45; color: #94a3b8;
+  }
+
+  /* ====================================
+     Kontakt
+     ==================================== */
+  .contact {
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: stretch;
+  }
+  @media (max-width: 880px) { .contact { grid-template-columns: 1fr; } }
+
+  .contact-card {
+    padding: clamp(32px, 4vw, 48px);
+    border-radius: 16px;
+    background: #0f172a;
+    border: 1px solid var(--indigo-border);
+  }
+  .contact-card .ask {
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.2; font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--indigo-fg-2);
+    margin-bottom: 18px;
+    text-wrap: balance;
+  }
+  .contact-card .ask .accent { color: var(--plasma); }
+  .contact-card p {
+    font-size: 15px; color: #94a3b8; line-height: 1.55;
+    margin-bottom: 24px; max-width: 50ch;
+    text-wrap: pretty;
+  }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .contact-side {
+    padding: clamp(32px, 4vw, 48px);
+    border-radius: 16px;
+    border: 1px solid var(--indigo-border);
+    background: rgba(15,23,42,0.45);
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .meta-row {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .meta-row .key {
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--indigo-muted);
+    margin-bottom: 6px;
+  }
+  .meta-row .val {
+    font-size: 15px; color: var(--indigo-fg-2);
+    letter-spacing: 0.02em;
+  }
+  .meta-row .val a { border-bottom: 1px solid var(--indigo-border); }
+  .meta-row .val a:hover { border-color: var(--plasma); color: var(--plasma); }
+
+  /* ====================================
+     Footer
+     ==================================== */
+  footer.foot {
+    margin-top: clamp(48px, 6vw, 96px);
+    padding: 48px 0 56px;
+    border-top: 1px solid var(--indigo-border);
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 36px;
+  }
+  @media (max-width: 880px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .foot-grid { grid-template-columns: 1fr; } }
+
+  .foot-brand .brand-word { font-size: 17px; }
+  .foot-brand .tag {
+    margin-top: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--indigo-muted);
+    max-width: 30ch;
+    line-height: 1.55;
+  }
+  .foot-brand .signature {
+    margin-top: 18px;
+    display: flex; flex-direction: column;
+    align-items: flex-start;
+    line-height: 0.9;
+  }
+  .foot-brand .sig-name {
+    font-family: 'Caveat', 'Brush Script MT', cursive;
+    font-weight: 500;
+    font-size: 36px;
+    color: #cfd6e3;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    transform: rotate(-5deg) skewX(-4deg);
+    opacity: 0.78;
+    margin-left: 6px;
+  }
+  .foot-brand .sig-underline {
+    width: 150px; height: 12px;
+    margin-top: -4px;
+    margin-left: 8px;
+    transform: rotate(-3deg);
+    opacity: 0.7;
+  }
+
+  .foot-made {
+    display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    color: var(--indigo-fg-2);
+  }
+  .foot-made b { color: var(--indigo-fg-2); font-weight: 500; }
+  .foot-made .sep { color: var(--indigo-muted); }
+  .foot-date { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+  .foot-date-sub {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--indigo-muted);
+    opacity: 0.85;
+  }
+  .foot-col h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--plasma-soft);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .foot-col li { font-size: 14px; color: #cbd5e1; }
+  .foot-col li a { border-bottom: 1px solid transparent; }
+  .foot-col li a:hover { border-color: var(--plasma); color: var(--plasma); }
+
+  .foot-bottom {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 50%, transparent);
+    display: flex; flex-wrap: wrap; gap: 16px 28px;
+    justify-content: space-between; align-items: baseline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--indigo-muted);
+  }
+  .foot-stamp {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid color-mix(in srgb, var(--plasma) 45%, transparent);
+    border-radius: 999px;
+    color: var(--plasma);
+    background: rgba(255,90,0,0.04);
+  }
+  .foot-stamp .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--plasma); }
+</style>
+</head>
+<body>
+
+<!-- Shared mark — exact same geometry as the system -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="lenkstern-mark" viewBox="-50 -50 100 100">
+      <g fill="#ff5a00">
+        <polygon points="0,-44 -8.5,-19 8.5,-19"/>
+        <polygon points="0,-44 -8.5,-19 8.5,-19" transform="rotate(60)"/>
+        <polygon points="0,-44 -8.5,-19 8.5,-19" transform="rotate(120)"/>
+        <polygon points="0,-44 -8.5,-19 8.5,-19" transform="rotate(180)"/>
+        <polygon points="0,-44 -8.5,-19 8.5,-19" transform="rotate(240)"/>
+        <polygon points="0,-44 -8.5,-19 8.5,-19" transform="rotate(300)"/>
+        <polygon points="15,0 7.5,12.99 -7.5,12.99 -15,0 -7.5,-12.99 7.5,-12.99"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============= TOP NAV ============= -->
+<header class="top">
+  <div class="container top-inner">
+    <a href="#" class="brand" aria-label="Lenkstern Startseite">
+      <span class="brand-mark"><span class="pulse" style="display:block;width:100%;height:100%;"><svg><use href="#lenkstern-mark"/></svg></span></span>
+      <span class="brand-word">lenkstern<span class="ev">e.&nbsp;V. (i.&nbsp;Gr.)</span></span>
+    </a>
+    <nav class="primary">
+      <a href="#was" class="hide-sm">Lenkstern</a>
+      <a href="#module" class="hide-sm">Module</a>
+      <a href="#haltung" class="hide-sm">Haltung</a>
+      <a href="#recht" class="hide-sm">Recht</a>
+      <a href="#stand" class="hide-sm">Stand</a>
+      <a href="#kontakt" class="cta">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============= HERO ============= -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Plattform nach der Reha</div>
+      <h1 class="hero-h">
+        Eine ruhige Lenkung<br/>
+        <span class="accent">für den Moment, in dem</span><br/>
+        alles neu wird.
+      </h1>
+      <p class="lede">
+        Lenkstern ist eine föderative, EU-souveräne Plattform für die
+        Generationen, die ihren Alltag nach einer Reha neu zusammenschrauben —
+        und für jene, die mit Lenkstern alt werden. Sieben Module,
+        ein Horizont.
+      </p>
+      <div class="hero-ctas">
+        <a href="#kontakt" class="btn btn--primary">
+          Kontakt aufnehmen <span class="arrow">→</span>
+        </a>
+        <a href="#module" class="btn btn--ghost">
+          Module ansehen
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-mark-wrap" hidden aria-hidden="true" style="display:none;">
+      <div class="hero-mark-aura aura"></div>
+      <div class="hero-mark pulse">
+        <svg><use href="#lenkstern-mark"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <dl class="hero-meta">
+      <div class="row"><dt>Trägerin</dt><dd>Lenkstern e.&nbsp;V. (i.&nbsp;Gr.)</dd></div>
+      <div class="row"><dt>Standort</dt><dd>Berlin &middot; Burghaun &middot; EU</dd></div>
+      <div class="row"><dt>Rechtsrahmen</dt><dd>DSGVO Art. 9 · § 203 StGB</dd></div>
+      <div class="row"><dt>Status</dt><dd>Pilot Reha &middot; 06 / 2026</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============= WAS IST LENKSTERN ============= -->
+<section class="block" id="was">
+  <div class="container">
+    <div class="section-label" data-i18n="was.label">Was ist Lenkstern</div>
+    <div class="was-grid">
+      <div>
+        <h2 class="section-h" data-i18n="was.h">Ein Werkzeug, das die Vorspannung hält.</h2>
+        <p class="section-sub" data-i18n="was.sub">
+          Der <b>Lenkstern</b> ist die sechsspitzige Sternmutter im Steuersatz eines Fahrrads — ein
+          unsichtbares Kleinteil, das die Lenkung präzise hält. Ohne sie wackelt der Steuersatz,
+          die Lager verschleißen, das Rad wird unfahrbar. Sie ist beim Neuaufbau zwingend.
+        </p>
+        <p class="was-body" data-i18n="was.body">
+          Genau das ist diese Plattform: das stille Kleinteil, das die Vorspannung hält,
+          wenn jemand das eigene Leben nach der Reha neu zusammenschraubt. Werkzeug, nicht Esoterik.
+          Werkzeug, kein Lifestyle. Aktive Semantik — denn „lenken" tut man.
+        </p>
+      </div>
+      <div class="was-mark-stage" aria-hidden="true">
+        <div class="was-mark-aura aura"></div>
+        <div class="was-mark pulse">
+          <svg><use href="#lenkstern-mark"/></svg>
+        </div>
+        <div class="was-caption mono">Sternmutter · Steuersatz · Vorspannung</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= HALTUNG ============= -->
+<section class="block" id="haltung">
+  <div class="container">
+    <div class="haltung-head">
+      <div class="haltung-head-text">
+        <div class="section-label">Haltung</div>
+        <h2 class="section-h">Was Lenkstern hält.</h2>
+        <p class="section-sub">
+          Bei Suchterkrankungen ist Datenschutz keine Formalie, sondern Existenzschutz.
+          Was wir nicht trennen, können wir nicht versprechen.
+        </p>
+      </div>
+      <div class="trust-shield-wrap" aria-hidden="true">
+        <img src="assets/germany-lock.jpg" alt="Deutschland · Sicherheit" class="trust-image" />
+      </div>
+    </div>
+
+    <div class="doctrine">
+      <div class="doctrine-list">
+        <div class="doctrine-item">
+          <h4>Infrastruktur, nicht Produkt.</h4>
+          <p>Wer mit Lenkstern alt werden soll, braucht eine Plattform, die ihn überlebt.
+            Deshalb wird der Kern unter <b>AGPL</b> veröffentlicht (Code öffentlich ab Q3 2026),
+            betrieben in der EU, getragen von einer föderativen Struktur, die kein einzelner
+            Anbieter abschalten kann. Wenn wir es nicht weiter tragen können, trägt es jemand
+            anderes — das ist der Unterschied zwischen einem Produkt und einer Infrastruktur.</p>
+        </div>
+        <div class="doctrine-item">
+          <h4>Architektur, nicht Beipackzettel.</h4>
+          <p>Bei Suchterkrankungen ist Datenschutz keine Formalie, sondern Existenzschutz.
+            Deshalb steckt er in der Architektur, nicht im Beipackzettel:
+            <b>Zero Data Retention</b> auf dem KI-Layer, getrennte Datenbanken pro Modul,
+            separate Rechtsträger für Therapie, Forschung und DiGA.
+            Was wir nicht trennen, können wir nicht versprechen.</p>
+        </div>
+        <div class="doctrine-item">
+          <h4>Was wir nicht tun.</h4>
+          <p>Lenkstern bewertet dich nicht. Keine Scores, keine Fortschrittsbalken, keine Nudges.
+            Es teilt nichts mit Krankenkassen, Arbeitgebern oder Plattformen,
+            die mit „Wellness" Daten verkaufen. Was hier passiert, bleibt hier —
+            weil die Architektur es nicht anders zulässt.</p>
+        </div>
+      </div>
+
+      <div class="doctrine-sub-label">Technisch konkret</div>
+
+      <div class="doctrine-list">
+        <div class="doctrine-item">
+          <h4>EU-souverän · Falkenstein</h4>
+          <p>Hosting auf <b>Hetzner Cloud · DC Falkenstein (DE)</b> · ISO 27001.
+            Orchestrierung selbst betrieben mit <b>Coolify</b>, kein Hyperscaler-Lock-in.
+            Registrar <b>INWX</b> (DE), AVV signiert.</p>
+        </div>
+        <div class="doctrine-item">
+          <h4>Pseudonyme zuerst</h4>
+          <p>Klarnamen sind die Ausnahme, nicht die Regel. Identifikation
+            passiert pseudonym, peer-to-peer-Kommunikation Ende-zu-Ende verschlüsselt.
+            Sucht braucht Schutzraum, kein Tracking.</p>
+        </div>
+        <div class="doctrine-item">
+          <h4>Code öffentlich · AGPL</h4>
+          <p>Lizenz: <b>AGPL</b> · Code wird ab Q3 2026 öffentlich. AGPL schützt vor
+            stiller Übernahme und ist Förder-Voraussetzung. Sub-Auftragsverarbeitung ist
+            dokumentiert; sobald das Repo öffentlich ist, kann jede:r prüfen, was unter
+            der Haube läuft.</p>
+        </div>
+      </div>
+
+      <div class="love-stamp" aria-label="Security Made in Germany" style="margin-top: 40px;">
+        <span data-i18n="stamp.security">Security</span>
+        <span data-i18n="stamp.made">Made in</span>
+        <b data-i18n="stamp.germany">Germany</b>
+        <span class="flag flag-eu" aria-hidden="true"><img src="assets/flag-eu.svg" alt="" width="22" height="14" style="display:block"/></span>
+        <span class="flag flag-de" aria-hidden="true">
+          <svg viewBox="0 0 30 18" width="22" height="14"><rect width="30" height="6" y="0" fill="#000"/><rect width="30" height="6" y="6" fill="#DD0000"/><rect width="30" height="6" y="12" fill="#FFCE00"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= RECHTSTRENNUNG / INFRASTRUKTUR ============= -->
+<section class="block" id="recht">
+  <div class="container">
+    <div class="section-label">Rechtstrennung &amp; Infrastruktur</div>
+    <h2 class="section-h">Jedes Modul trägt seine eigene Verantwortung.</h2>
+    <p class="section-sub">
+      Föderativ heißt: keine Sammelhaftung, keine Datentöpfe.
+      Jedes Modul hat seine eigene Rechtsform, seinen eigenen Verantwortlichen,
+      seine eigene DSGVO-Grundlage und seine eigene Datenklasse. Der Kern hält
+      nur, was der Kern halten muss.
+    </p>
+
+    <div class="rt-grid">
+      <div class="rt-row rt-head">
+        <div>Modul</div>
+        <div>Rechtsform</div>
+        <div>DSGVO-Grundlage</div>
+        <div>Datenklasse</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-mod"><span class="dot" style="background: var(--c-kern);"></span> Kern <span class="rt-host mono">dein.lenkstern.eu</span></div>
+        <div>Lenkstern e.&nbsp;V. (gGmbH-Option ab 2027)</div>
+        <div class="mono">Art. 9 (2) lit. d</div>
+        <div>Kerndaten · Pseudonym, Peer-Messages</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-mod"><span class="dot" style="background: var(--c-shg);"></span> SHG <span class="rt-host mono">group.lenkstern.eu</span></div>
+        <div>Eigener Verein / Selbsthilfe-Verband</div>
+        <div class="mono">Art. 6 (1) a + § 20h SGB V</div>
+        <div>Gruppendaten · Termine · Teilnahme-Pseudonyme</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-mod"><span class="dot" style="background: var(--c-therapie);"></span> Therapie <span class="rt-host mono">therapie.lenkstern.eu</span></div>
+        <div>gGmbH / Praxis-Träger</div>
+        <div class="mono">Art. 9 (2) h + § 203 StGB</div>
+        <div>Therapiedaten · separates Audit-Log</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-mod"><span class="dot" style="background: var(--c-reha);"></span> Reha <span class="rt-host mono">reha.lenkstern.eu</span></div>
+        <div>Kooperation Rehaklinik · ggf. gGmbH</div>
+        <div class="mono">Art. 9 (2) h + SGB V/VI</div>
+        <div>Reha-Daten · Katamnese · Verlauf</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-mod"><span class="dot" style="background: var(--c-community);"></span> Community <span class="rt-host mono">community.lenkstern.eu</span></div>
+        <div>Eigener Träger</div>
+        <div class="mono">Art. 6 (1) a + (1) f</div>
+        <div>Öffentliche Beiträge · pseudonym</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-mod"><span class="dot" style="background: var(--c-markt);"></span> Markt <span class="rt-host mono">markt.lenkstern.eu</span></div>
+        <div>Anbieter (jeweils eigener Verantwortlicher)</div>
+        <div class="mono">Art. 6 (1) b</div>
+        <div>Vertragsdaten · Maßnahmen</div>
+      </div>
+    </div>
+
+    <div class="infra-strip">
+      <div class="infra-item">
+        <div class="infra-key">Hosting</div>
+        <div class="infra-val">Hetzner Cloud<br/><span class="mono">DC Falkenstein · DE</span></div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-key">Orchestrierung</div>
+        <div class="infra-val">Coolify<br/><span class="mono">selbst betrieben · OSS</span></div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-key">Registrar</div>
+        <div class="infra-val">INWX<br/><span class="mono">DE · AVV signiert 22.05.2026</span></div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-key">Lizenz</div>
+        <div class="infra-val">AGPL<br/><span class="mono">öffentlich ab Q3 2026</span></div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-key">Audit</div>
+        <div class="infra-val">DSFA &amp; AVV<br/><span class="mono">pro Modul · TÜV-konform</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= WHY NOW ============= -->
+<section class="block" id="warum">
+  <div class="container">
+    <div class="section-label">Warum jetzt</div>
+    <h2 class="section-h">Eine Plattform, die mit ihren Menschen alt wird.</h2>
+    <p class="section-sub">
+      Lenkstern ist Infrastruktur, nicht Kampagne. Wir bauen für einen Zeithorizont
+      von zwanzig Jahren, nicht für eine Saison.
+    </p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="num">01 · Infrastruktur</div>
+        <h3>Saisonfarben altern, Vorspannung trägt.</h3>
+        <p>Was 2026 modern wirkt, sieht 2046 nach 2026 aus. Unser Farbsystem ist auf den
+          Zeithorizont 2046 ausgelegt — erdig, technisch, präzise.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">02 · Demografie</div>
+        <h3>Für 75 bedienbar, nicht nur für 25.</h3>
+        <p>Wer mit 55 aus der Reha kommt, soll Lenkstern auch mit 75 noch bedienen —
+          wenn die Augen nachlassen, die Hände unsicherer werden, das Tempo ruhiger.
+          Hoher Kontrast, große Bedienflächen, klare Hierarchie. Lesbar bei Tageslicht,
+          bedienbar mit Lesebrille, verständlich ohne Schulung. Was die Tochter heute
+          einrichtet, soll der Vater in zwanzig Jahren noch selbst bedienen.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">03 · Wirkung</div>
+        <h3>Anti-Reizüberflutung als Designprinzip.</h3>
+        <p>Pro Oberfläche genau ein Akzent, kein Karneval. Reha-bezogene Software
+          muss tragen, nicht aufjubeln — auch im Code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= STAND / ROADMAP ============= -->
+<section class="block" id="stand">
+  <div class="container">
+    <div class="section-label">Stand</div>
+    <h2 class="section-h">Klein gehalten, langsam aufgebaut.</h2>
+    <p class="section-sub">
+      Architektur, Farbsystem und Rechtsstruktur stehen. Was jetzt folgt:
+      Vereinsgründung, erste Reha-Pilotklinik, dann Modul für Modul.
+    </p>
+
+    <div class="timeline">
+      <div class="tl live">
+        <div class="when"><span class="dot"></span> Heute</div>
+        <div class="what">Reha-Pilot · Werkstatt</div>
+        <div class="note">Erste stationäre Kooperationsklinik. Co-Creation während der
+          laufenden Reha-Phase, nicht am Schreibtisch.</div>
+      </div>
+      <div class="tl">
+        <div class="when"><span class="dot"></span> Als Nächstes</div>
+        <div class="what">Kern &amp; Wurzelwerk</div>
+        <div class="note">Pseudonyme Identität, SHG-Vernetzung.
+          Beginn der föderalen Anbindung.</div>
+      </div>
+      <div class="tl">
+        <div class="when"><span class="dot"></span> Danach</div>
+        <div class="what">Therapie &amp; Anschluss</div>
+        <div class="note">Ambulante Begleitung mit § 203 StGB im Code: ärztliche
+          Schweigepflicht ist Architektur, nicht Hausordnung. Dazu ein kuratierter
+          Marktplatz für alles, was nach der Reha trägt — Yoga, Rückenschule und andere
+          Bewegungsangebote, Schulungen von Unternehmen, Arbeitsplätze, Wiedereinstiegswege.</div>
+      </div>
+      <div class="tl">
+        <div class="when"><span class="dot"></span> Später</div>
+        <div class="what">Föderation</div>
+        <div class="note">Andere Träger übernehmen den Code, betreiben eigene Instanzen,
+          bleiben über offene Schnittstellen verbunden. Lenkstern wird Infrastruktur,
+          nicht Projekt.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= KONTAKT ============= -->
+<section class="block" id="kontakt">
+  <div class="container">
+    <div class="section-label">Kontakt</div>
+    <h2 class="section-h">Mitbauen, mitfinanzieren, mit&shy;lenken.</h2>
+    <p class="section-sub">
+      Lenkstern wird im Verbund gebaut: Kliniken, SHGs, Vereine, Therapeut:innen,
+      Anbieter und Förderer. Wenn Sie an einem dieser Punkte mitwirken können —
+      melden Sie sich.
+    </p>
+
+    <div class="contact">
+      <div class="contact-card">
+        <div class="ask">
+          Schreiben Sie uns. <span class="accent">Wir lesen mit.</span>
+        </div>
+        <p>
+          Eine kurze Mail mit Ihrer Rolle (Klinik, SHG, Therapie, Förderung, Presse,
+          Mitmachen) reicht. Wir antworten in der Regel innerhalb von zwei Werktagen,
+          ohne Newsletter-Trichter dahinter.
+        </p>
+        <div class="contact-actions">
+          <a href="mailto:straussgero@pm.me?subject=Lenkstern%20%C2%B7%20Kontakt"
+             class="btn btn--primary">
+            straussgero@pm.me <span class="arrow">→</span>
+          </a>
+          <a href="mailto:straussgero@pm.me?subject=Lenkstern%20%C2%B7%20Pilot%20Reha%2006%2F2026"
+             class="btn btn--ghost">
+            Reha-Pilot anfragen
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-side">
+        <div class="meta-row">
+          <div class="key">Trägerin</div>
+          <div class="val">Lenkstern e.&nbsp;V. (i.&nbsp;Gr.)</div>
+        </div>
+        <div class="meta-row">
+          <div class="key">E-Mail</div>
+          <div class="val"><a href="mailto:straussgero@pm.me">straussgero@pm.me</a></div>
+        </div>
+        <div class="meta-row">
+          <div class="key">Domain</div>
+          <div class="val">lenkstern.eu</div>
+        </div>
+        <div class="meta-row">
+          <div class="key">Stand</div>
+          <div class="val">23.05.2026 · V 1.0<br/><span style="color: var(--indigo-muted); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">77 Jahre GG</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand" style="margin-bottom: 8px;">
+          <span class="brand-mark"><span class="pulse" style="display:block;width:100%;height:100%;"><svg><use href="#lenkstern-mark"/></svg></span></span>
+          <span class="brand-word">lenkstern<span class="ev">e.&nbsp;V. (i.&nbsp;Gr.)</span></span>
+        </a>
+        <div class="tag" data-i18n="foot.tag">Föderative, EU-souveräne Plattform für die Zeit nach der Reha.</div>
+        <div class="signature" aria-label="Signature Strauß">
+          <span class="sig-name">Strauß</span>
+          <svg class="sig-underline" viewBox="0 0 220 18" aria-hidden="true">
+            <path d="M2,11 C 25,4 60,5 95,9 C 130,13 165,10 218,6"
+                  fill="none" stroke="#ff5a00" stroke-width="0.9"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  opacity="0.6" />
+          </svg>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Föderation</h5>
+        <ul>
+          <li><a href="#module">Vorspannung &middot; Dachverband</a></li>
+          <li><a href="#module">dein.lenkstern.eu</a></li>
+          <li><a href="#module">group.lenkstern.eu</a></li>
+          <li><a href="#module">therapie.lenkstern.eu</a></li>
+          <li><a href="#module">reha.lenkstern.eu</a></li>
+          <li><a href="#module">community.lenkstern.eu</a></li>
+          <li><a href="#module">markt.lenkstern.eu</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Verein</h5>
+        <ul>
+          <li><a href="#haltung">Haltung</a></li>
+          <li><a href="#recht">Rechtstrennung</a></li>
+          <li><a href="#stand">Stand</a></li>
+          <li><a href="#warum">Warum jetzt</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Pflichtangaben</h5>
+        <ul>
+          <li>Impressum folgt</li>
+          <li>Datenschutz folgt</li>
+          <li>DSFA folgt</li>
+          <li>AVV (INWX) dokumentiert</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <div>© 2026 Lenkstern e.&nbsp;V. (i.&nbsp;Gr.)</div>
+      <div class="foot-made">
+        <span data-i18n="foot.made">Made in</span>
+        <b data-i18n="foot.made.germany">Germany</b>
+      </div>
+      <div class="foot-date">
+        <div>23.05.2026</div>
+        <div class="foot-date-sub">77 Jahre GG</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
