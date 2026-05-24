@@ -80,7 +80,9 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .pulse, .aura { animation: none !important; }
+    .pulse, .aura,
+    .module-status.now::before,
+    .tl.live .when .dot { animation: none !important; }
   }
 
   /* ====================================
