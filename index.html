@@ -10,17 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    /* Vorspannung — Dachverband / Lenkstern */
-    --indigo-bg:    #010a1e;
-    --indigo-card:  #0f172a;
-    --indigo-surf:  #1e2937;
-    --indigo-border:#334155;
-    --indigo-muted: #64748b;
-    --indigo-fg:    #e0e7ff;
-    --indigo-fg-2:  #f1f5f9;
-    --plasma:       #ff5a00;
-    --plasma-soft:  #FFB180;
-    --plasma-deep:  #c2410c;
+    /* Vorspannung — Dachverband / Lenkstern (offizielle Doku-Werte) */
+    --indigo-bg:    #080A1E;  /* Deep Space Indigo, Base (darker variant 2026-05-24) */
+    --indigo-card:  #1a1e3e;  /* Card-Tief (zwischen Base und Surface) */
+    --indigo-surf:  #232847;  /* Indigo Light, Surface */
+    --indigo-border:#3a3f5e;  /* von Muted abgeleitet, +Saettigung */
+    --indigo-muted: #6A6F8C;  /* Indigo Muted, Sekundaertext */
+    --indigo-fg:    #E8E6F0;  /* Cosmic Foreground, Haupttext */
+    --indigo-fg-2:  #F2F0F8;  /* etwas heller fuer Headlines */
+    --plasma:       #FF6A1F;  /* Plasma Orange, Mark */
+    --plasma-soft:  #FFB180;  /* Plasma Soft */
+    --plasma-deep:  #C24A0C;  /* Plasma Deep (Hover/Active) */
 
     /* Module accent colors (palette accents) */
     --c-kern:      #00e5d8;
@@ -56,12 +56,12 @@
      Neon glow pulses, outline stays static
      ==================================== */
   @keyframes hb-pulse {
-    0%   { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
-    8%   { filter: drop-shadow(0 0 24px rgba(255,170,80,1)) drop-shadow(0 0 56px rgba(255,110,20,0.85)) drop-shadow(0 0 110px rgba(255,90,0,0.55)) drop-shadow(0 0 180px rgba(255,90,0,0.30)); }
-    18%  { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
-    26%  { filter: drop-shadow(0 0 18px rgba(255,150,60,0.85)) drop-shadow(0 0 42px rgba(255,100,10,0.60)) drop-shadow(0 0 78px rgba(255,90,0,0.34)); }
-    36%  { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
-    100% { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,90,0,0.30)); }
+    0%   { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,106,31,0.30)); }
+    8%   { filter: drop-shadow(0 0 24px rgba(255,170,80,1)) drop-shadow(0 0 56px rgba(255,110,20,0.85)) drop-shadow(0 0 110px rgba(255,106,31,0.55)) drop-shadow(0 0 180px rgba(255,106,31,0.30)); }
+    18%  { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,106,31,0.30)); }
+    26%  { filter: drop-shadow(0 0 18px rgba(255,150,60,0.85)) drop-shadow(0 0 42px rgba(255,100,10,0.60)) drop-shadow(0 0 78px rgba(255,106,31,0.34)); }
+    36%  { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,106,31,0.30)); }
+    100% { filter: drop-shadow(0 0 6px rgba(255,138,40,0.55)) drop-shadow(0 0 14px rgba(255,106,31,0.30)); }
   }
   @keyframes hb-aura {
     0%, 100% { opacity: 0.30; }
@@ -79,6 +79,7 @@
     will-change: opacity;
   }
   @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
     .pulse, .aura { animation: none !important; }
   }
 
@@ -166,7 +167,7 @@
   }
   .eyebrow .dot {
     width: 8px; height: 8px; border-radius: 999px; background: var(--plasma);
-    box-shadow: 0 0 14px rgba(255,90,0,0.6);
+    box-shadow: 0 0 14px rgba(255,106,31,0.6);
   }
 
   h1.hero-h {
@@ -225,7 +226,7 @@
     position: absolute;
     width: 150%; aspect-ratio: 1/1; border-radius: 50%;
     background:
-      radial-gradient(circle, rgba(255,150,60,0.55) 0%, rgba(255,90,0,0.30) 24%, rgba(255,90,0,0.10) 48%, transparent 70%);
+      radial-gradient(circle, rgba(255,150,60,0.55) 0%, rgba(255,106,31,0.30) 24%, rgba(255,106,31,0.10) 48%, transparent 70%);
     filter: blur(12px);
   }
   .hero-mark {
@@ -290,7 +291,7 @@
     position: absolute;
     width: 110%; aspect-ratio: 1/1; border-radius: 50%;
     background:
-      radial-gradient(circle, rgba(255,150,60,0.45) 0%, rgba(255,90,0,0.22) 28%, transparent 65%);
+      radial-gradient(circle, rgba(255,150,60,0.45) 0%, rgba(255,106,31,0.22) 28%, transparent 65%);
     filter: blur(10px);
     z-index: 0;
   }
@@ -443,7 +444,7 @@
   }
   .module:first-child { border-top: none; }
   .module:hover {
-    background: rgba(255,90,0,0.04);
+    background: rgba(255,106,31,0.04);
   }
   .module-codename {
     display: inline-flex; align-items: center; gap: 12px;
@@ -490,7 +491,7 @@
     border-radius: 999px;
     background: var(--indigo-muted);
   }
-  .module-status.pilot::before { background: var(--plasma); box-shadow: 0 0 10px rgba(255,90,0,0.8); }
+  .module-status.pilot::before { background: var(--plasma); box-shadow: 0 0 10px rgba(255,106,31,0.8); }
   .module-status.now::before   { background: var(--c-kern); box-shadow: 0 0 10px rgba(0,229,216,0.8); animation: live-blink 1.6s ease-in-out infinite; }
   @keyframes live-blink {
     0%, 100% { opacity: 1; }
@@ -530,7 +531,7 @@
     content: '';
     position: absolute;
     inset: -12%;
-    background: radial-gradient(circle, rgba(255,90,0,0.20) 0%, rgba(255,90,0,0.08) 35%, rgba(56,189,248,0.06) 70%, transparent 90%);
+    background: radial-gradient(circle, rgba(255,106,31,0.20) 0%, rgba(255,106,31,0.08) 35%, rgba(56,189,248,0.06) 70%, transparent 90%);
     filter: blur(20px);
     z-index: 0;
     border-radius: 24px;
@@ -543,9 +544,9 @@
     border-radius: 14px;
     display: block;
     box-shadow:
-      0 0 0 1px rgba(255,90,0,0.20),
+      0 0 0 1px rgba(255,106,31,0.20),
       0 20px 48px -16px rgba(0,0,0,0.7),
-      0 0 60px -12px rgba(255,90,0,0.18);
+      0 0 60px -12px rgba(255,106,31,0.18);
     mix-blend-mode: screen;
     filter: saturate(0.78) hue-rotate(-8deg) contrast(1.05) brightness(1.02);
   }
@@ -651,7 +652,7 @@
     padding: 12px 20px;
     border: 1px solid color-mix(in srgb, var(--plasma) 45%, var(--indigo-border));
     border-radius: 999px;
-    background: rgba(255,90,0,0.06);
+    background: rgba(255,106,31,0.06);
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
     letter-spacing: 0.14em;
@@ -662,7 +663,7 @@
   .love-stamp .sep { color: var(--indigo-muted); }
   .ls-heart, .ls-heart-inline {
     display: inline-flex; align-items: center; justify-content: center;
-    filter: drop-shadow(0 0 6px rgba(255,90,0,0.6));
+    filter: drop-shadow(0 0 6px rgba(255,106,31,0.6));
     animation: heart-beat 1.4s ease-in-out infinite;
   }
   .flag {
@@ -706,7 +707,7 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--plasma-soft);
-    background: rgba(255,90,0,0.05);
+    background: rgba(255,106,31,0.05);
     padding-top: 14px; padding-bottom: 14px;
   }
   .rt-mod {
@@ -1024,12 +1025,268 @@
     border: 1px solid color-mix(in srgb, var(--plasma) 45%, transparent);
     border-radius: 999px;
     color: var(--plasma);
-    background: rgba(255,90,0,0.04);
+    background: rgba(255,106,31,0.04);
   }
   .foot-stamp .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--plasma); }
+
+  /* ====================================
+     Dual-Modus: Choice-Screen
+     ==================================== */
+  #choice-screen {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--indigo-bg);
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: clamp(24px, 5vw, 48px);
+    text-align: center;
+  }
+  body[data-mode="unset"] #choice-screen { display: flex; }
+  body[data-mode="unset"] #app-main,
+  body[data-mode="unset"] header.top { display: none; }
+
+  .choice-inner { max-width: 520px; width: 100%; }
+  .choice-mark {
+    width: 72px; height: 72px; margin: 0 auto 28px;
+    color: var(--plasma);
+  }
+  .choice-mark svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .choice-word {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 500; letter-spacing: -0.02em;
+    color: var(--indigo-fg-2);
+    margin-bottom: 16px;
+  }
+  .choice-claim {
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.5; color: #94a3b8;
+    margin-bottom: 40px;
+    text-wrap: pretty;
+  }
+  .choice-actions {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    justify-content: center;
+  }
+  .choice-hint {
+    margin-top: 28px;
+    font-size: 14px; color: var(--indigo-muted);
+    line-height: 1.5;
+  }
+
+  /* ====================================
+     Dual-Modus: Pill-Switcher
+     ==================================== */
+  .mode-switcher {
+    display: inline-flex;
+    border: 1px solid var(--indigo-border);
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(15,23,42,0.55);
+    flex-shrink: 0;
+  }
+  .mode-switcher button {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: none; background: transparent;
+    color: var(--indigo-muted);
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .mode-switcher button:hover { color: var(--indigo-fg-2); }
+  .mode-switcher button[aria-pressed="true"] {
+    background: var(--plasma);
+    color: #fff;
+  }
+  .mode-switcher button:focus-visible {
+    outline: 2px solid var(--plasma-soft);
+    outline-offset: 2px;
+  }
+  .top-inner { gap: 16px; }
+  @media (max-width: 760px) {
+    .mode-switcher { order: 3; width: 100%; justify-content: center; }
+    .top-inner { flex-wrap: wrap; }
+    nav.primary { margin-left: auto; }
+  }
+
+  /* ====================================
+     Dual-Modus: Kurz-Ansicht
+     ==================================== */
+  body[data-mode="short"] #view-full { display: none; }
+  body[data-mode="full"]  #view-short { display: none; }
+  body[data-mode="short"] nav.primary .hide-sm,
+  body[data-mode="short"] nav.primary .cta { display: none; }
+
+  .short-page {
+    padding: clamp(64px, 10vw, 128px) 0 clamp(80px, 12vw, 160px);
+  }
+  .short-inner { max-width: 680px; }
+  .short-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--plasma-soft);
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .short-eyebrow::before {
+    content: ''; width: 8px; height: 8px;
+    background: var(--plasma); border-radius: 999px;
+    box-shadow: 0 0 14px rgba(255,106,31,0.6);
+  }
+  .short-h {
+    font-size: clamp(34px, 5.2vw, 60px);
+    line-height: 1.04;
+    font-weight: 500;
+    letter-spacing: -0.028em;
+    color: var(--indigo-fg-2);
+    margin-bottom: 36px;
+    text-wrap: balance;
+    max-width: 18ch;
+  }
+  .short-lede {
+    font-family: 'IBM Plex Serif', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.4;
+    color: var(--indigo-fg);
+    text-wrap: pretty;
+    letter-spacing: -0.005em;
+  }
+  .short-section {
+    margin-top: clamp(56px, 7vw, 96px);
+    padding-top: clamp(40px, 5vw, 64px);
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 45%, transparent);
+  }
+  .short-section h2 {
+    font-size: clamp(24px, 2.8vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+    color: var(--indigo-fg-2);
+    margin-bottom: 24px;
+    text-wrap: balance;
+    max-width: 22ch;
+  }
+  .short-section p {
+    font-size: clamp(16px, 1.45vw, 19px);
+    line-height: 1.65;
+    color: var(--indigo-fg);
+    text-wrap: pretty;
+  }
+  .short-section p + p { margin-top: 20px; }
+  .short-section p b, .short-section p strong {
+    color: var(--indigo-fg-2);
+    font-weight: 500;
+  }
+  .short-list {
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+    padding-left: 0;
+  }
+  .short-list li {
+    font-size: clamp(16px, 1.45vw, 19px);
+    line-height: 1.55;
+    color: var(--indigo-fg);
+    padding-left: 28px;
+    position: relative;
+    text-wrap: pretty;
+  }
+  .short-list li::before {
+    content: '';
+    position: absolute; left: 0; top: 0.6em;
+    width: 8px; height: 8px; border-radius: 999px;
+    background: var(--plasma);
+    box-shadow: 0 0 10px rgba(255,106,31,0.5);
+  }
+  .short-cta { margin-top: 36px; }
+
+  /* ====================================
+     Module cards — klickbar
+     ==================================== */
+  button.module-card {
+    width: 100%; text-align: left;
+    border: none; background: transparent;
+    cursor: pointer;
+    font: inherit; color: inherit;
+  }
+  button.module-card:focus-visible {
+    outline: 2px solid var(--plasma-soft);
+    outline-offset: -2px;
+    background: rgba(255,106,31,0.06);
+  }
+
+  .module-detail {
+    scroll-margin-top: 88px;
+    padding-top: clamp(32px, 4vw, 48px);
+    padding-bottom: clamp(32px, 4vw, 48px);
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 50%, transparent);
+  }
+  .module-detail-placeholder {
+    font-size: 16px; color: var(--indigo-muted);
+    font-style: italic;
+    padding: 24px;
+    border: 1px dashed var(--indigo-border);
+    border-radius: 12px;
+    background: rgba(15,23,42,0.35);
+  }
+  .module-detail-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .module-detail-head .swatch {
+    width: 10px; height: 10px; border-radius: 999px;
+    box-shadow: 0 0 14px currentColor;
+  }
+  .module-detail-head h3 {
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 500; letter-spacing: -0.015em;
+    color: var(--indigo-fg-2);
+  }
+  .module-detail-host {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px; color: var(--plasma);
+    margin-left: auto;
+  }
+
+  .foot-reset {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+  .foot-reset a {
+    color: var(--indigo-muted);
+    border-bottom: 1px solid transparent;
+  }
+  .foot-reset a:hover { color: var(--plasma); border-color: var(--plasma); }
 </style>
 </head>
-<body>
+<body data-mode="unset">
+
+<!-- ============= CHOICE SCREEN ============= -->
+<div id="choice-screen" role="dialog" aria-modal="true" aria-labelledby="choice-heading">
+  <div class="choice-inner">
+    <div class="choice-mark pulse" aria-hidden="true">
+      <svg><use href="#lenkstern-mark"/></svg>
+    </div>
+    <div class="choice-word" id="choice-heading">lenkstern</div>
+    <p class="choice-claim">
+      Eine Plattform für Menschen nach der Reha — ruhig, sicher, auf lange Sicht gebaut.
+    </p>
+    <div class="choice-actions">
+      <button type="button" class="btn btn--primary" data-choose="short">
+        Schneller Überblick
+      </button>
+      <button type="button" class="btn btn--ghost" data-choose="full">
+        Mehr im Detail
+      </button>
+    </div>
+    <p class="choice-hint">Du kannst jederzeit zwischen den Ansichten wechseln.</p>
+  </div>
+</div>
 
 <!-- Shared mark — exact same geometry as the system -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1063,8 +1320,95 @@
       <a href="#stand" class="hide-sm">Stand</a>
       <a href="#kontakt" class="cta">Kontakt</a>
     </nav>
+    <div class="mode-switcher" role="group" aria-label="Ansicht wechseln">
+      <button type="button" id="mode-short" aria-pressed="false">Kurz</button>
+      <button type="button" id="mode-full" aria-pressed="false">Detail</button>
+    </div>
   </div>
 </header>
+
+<div id="app-main">
+
+<!-- ============= KURZ-ANSICHT ============= -->
+<div id="view-short">
+  <section class="short-page">
+    <div class="container">
+      <div class="short-inner">
+        <div class="short-eyebrow">Schneller Überblick</div>
+        <h1 class="short-h">Was ist Lenkstern?</h1>
+        <p class="short-lede">
+          Dein Begleiter durch die Reha — und durch die Zeit, in der die Klinik dich loslässt
+          und der Alltag dich noch nicht hält. Von der Vorbereitung über die Klinikwochen bis
+          zu den Monaten, in denen du den Halt selbst wieder aufbauen musst.
+        </p>
+
+        <div class="short-section">
+          <h2>Warum es Lenkstern braucht</h2>
+          <p>
+            Reha findet meist weit weg von zu Hause statt. Die Menschen, die du dort kennenlernst,
+            wohnen nicht neben dir, wenn du entlassen wirst. Genau in dieser Lücke passieren die
+            meisten Rückfälle — nicht, weil der Wille fehlt, sondern weil niemand mehr da ist,
+            wenn der Mittwochabend lang wird.
+          </p>
+          <p>
+            <b>Lenkstern schließt die Lücke, bevor sie aufgeht.</b> Du findest deine Selbsthilfegruppe
+            am Wohnort, während du noch in der Klinik bist. Du lernst sie per Video kennen, bevor
+            du entlassen wirst. Du gehst nicht zu Fremden. Du gehst zu Menschen, die dich erwarten.
+          </p>
+        </div>
+
+        <div class="short-section">
+          <h2>Für wen?</h2>
+          <p>
+            Für dich, wenn dir eine Reha bevorsteht oder gerade hinter dir liegt. Für Selbsthilfegruppen,
+            die ihre Türen schon vor der Entlassung öffnen wollen. Für Kliniken, die wissen:
+            Eine gute Reha beginnt vor dem Eingang und endet nicht am Ausgang.
+          </p>
+        </div>
+
+        <div class="short-section">
+          <h2>Was Lenkstern hält</h2>
+          <ul class="short-list">
+            <li>Deine Gruppe am Wohnort, bevor du sie brauchst</li>
+            <li>Struktur für die Tage, an denen alles wackelt</li>
+            <li>Übersicht statt Überforderung — ein Werkzeug, das trägt, nicht erschlägt</li>
+            <li>Anker für den Alltag: kurze Impulse, kein Therapieersatz</li>
+            <li>Externe Angebote, die dein Leben füllen — kein Verwalten von Verzicht</li>
+            <li>Etwas, das mit dir alt werden kann</li>
+          </ul>
+        </div>
+
+        <div class="short-section">
+          <h2>Jetzt mitbauen</h2>
+          <p>
+            Lenkstern entsteht mit den ersten Testerinnen und Testern. Mit Betroffenen, die ehrlich
+            sagen, was hilft und was nervt. Mit Kliniken und Selbsthilfegruppen, die bereit sind,
+            den Übergang zu schließen.
+          </p>
+          <div class="short-cta">
+            <a href="mailto:tester@lenkstern.eu?subject=Lenkstern%20%C2%B7%20Tester%20werden" class="btn btn--primary">
+              Tester werden <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="container">
+      <div class="foot-bottom">
+        <div>© 2026 Lenkstern e.&nbsp;V. (i.&nbsp;Gr.)</div>
+        <div class="foot-reset">
+          <a href="?reset=1" id="reset-link-short">Ansicht zurücksetzen</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============= DETAIL-ANSICHT ============= -->
+<div id="view-full">
 
 <!-- ============= HERO ============= -->
 <section class="hero">
@@ -1137,6 +1481,102 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ============= MODULE ============= -->
+<section class="block" id="module">
+  <div class="container">
+    <div class="section-label">Module</div>
+    <h2 class="section-h">Fünf Bereiche, ein Horizont.</h2>
+    <p class="section-sub">
+      Jedes Modul hat seine eigene Adresse und Verantwortung.
+      Klick auf ein Modul, um mehr zu sehen.
+    </p>
+
+    <div class="modules">
+      <button type="button" class="module module-card" data-module-id="reha" aria-label="Modul Reha — Details anzeigen">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-reha);"></span> Reha</div>
+        <p class="module-desc">Begleitung während und nach der stationären Reha-Kur.</p>
+        <div class="module-host mono">reha<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status pilot">Pilot 06/2026</span>
+      </button>
+
+      <button type="button" class="module module-card" data-module-id="dein" aria-label="Modul Kern — Details anzeigen">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-kern);"></span> Kern</div>
+        <p class="module-desc">Dein pseudonymes Profil — die Basis für alles Weitere.</p>
+        <div class="module-host mono">dein<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status">In Planung</span>
+      </button>
+
+      <button type="button" class="module module-card" data-module-id="group" aria-label="Modul SHG — Details anzeigen">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-shg);"></span> SHG</div>
+        <p class="module-desc">Selbsthilfegruppen — Termine, Austausch, Vernetzung.</p>
+        <div class="module-host mono">group<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status">In Planung</span>
+      </button>
+
+      <button type="button" class="module module-card" data-module-id="therapie" aria-label="Modul Therapie — Details anzeigen">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-therapie);"></span> Therapie</div>
+        <p class="module-desc">Ambulante Begleitung — getrennt geschützt, § 203 im Code.</p>
+        <div class="module-host mono">therapie<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status">In Planung</span>
+      </button>
+
+      <button type="button" class="module module-card" data-module-id="community" aria-label="Modul Community — Details anzeigen">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-community);"></span> Community</div>
+        <p class="module-desc">Öffentlicher Austausch — pseudonym, ohne Datenverkauf.</p>
+        <div class="module-host mono">community<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status">In Planung</span>
+      </button>
+    </div>
+
+    <div class="module-details">
+      <article class="module-detail" id="module-reha" tabindex="-1" aria-labelledby="module-reha-title">
+        <div class="module-detail-head">
+          <span class="swatch" style="background: var(--c-reha);"></span>
+          <h3 id="module-reha-title">Reha</h3>
+          <span class="module-detail-host mono">reha.lenkstern.eu</span>
+        </div>
+        <p class="module-detail-placeholder">Inhalt folgt</p>
+      </article>
+
+      <article class="module-detail" id="module-dein" tabindex="-1" aria-labelledby="module-dein-title">
+        <div class="module-detail-head">
+          <span class="swatch" style="background: var(--c-kern);"></span>
+          <h3 id="module-dein-title">Kern</h3>
+          <span class="module-detail-host mono">dein.lenkstern.eu</span>
+        </div>
+        <p class="module-detail-placeholder">Inhalt folgt</p>
+      </article>
+
+      <article class="module-detail" id="module-group" tabindex="-1" aria-labelledby="module-group-title">
+        <div class="module-detail-head">
+          <span class="swatch" style="background: var(--c-shg);"></span>
+          <h3 id="module-group-title">SHG</h3>
+          <span class="module-detail-host mono">group.lenkstern.eu</span>
+        </div>
+        <p class="module-detail-placeholder">Inhalt folgt</p>
+      </article>
+
+      <article class="module-detail" id="module-therapie" tabindex="-1" aria-labelledby="module-therapie-title">
+        <div class="module-detail-head">
+          <span class="swatch" style="background: var(--c-therapie);"></span>
+          <h3 id="module-therapie-title">Therapie</h3>
+          <span class="module-detail-host mono">therapie.lenkstern.eu</span>
+        </div>
+        <p class="module-detail-placeholder">Inhalt folgt</p>
+      </article>
+
+      <article class="module-detail" id="module-community" tabindex="-1" aria-labelledby="module-community-title">
+        <div class="module-detail-head">
+          <span class="swatch" style="background: var(--c-community);"></span>
+          <h3 id="module-community-title">Community</h3>
+          <span class="module-detail-host mono">community.lenkstern.eu</span>
+        </div>
+        <p class="module-detail-placeholder">Inhalt folgt</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -1514,8 +1954,146 @@
         <div class="foot-date-sub">77 Jahre GG</div>
       </div>
     </div>
+    <div class="foot-reset">
+      <a href="?reset=1" id="reset-link-full">Ansicht zurücksetzen</a>
+    </div>
   </div>
 </footer>
+
+</div><!-- /view-full -->
+</div><!-- /app-main -->
+
+<script>
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'lenkstern_mode';
+  var body = document.body;
+  var choiceScreen = document.getElementById('choice-screen');
+  var btnShort = document.getElementById('mode-short');
+  var btnFull = document.getElementById('mode-full');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function storageGet(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+
+  function storageSet(key, value) {
+    try { localStorage.setItem(key, value); return true; } catch (e) { return false; }
+  }
+
+  function storageRemove(key) {
+    try { localStorage.removeItem(key); return true; } catch (e) { return false; }
+  }
+
+  function modeFromHash() {
+    var h = location.hash.replace(/^#\/?/, '');
+    if (h === 'short') return 'short';
+    if (h === 'full') return 'full';
+    return null;
+  }
+
+  function syncHash(mode) {
+    var target = '#/' + mode;
+    var cleanSearch = location.search.replace(/([?&])reset=1&?/, '$1').replace(/[?&]$/, '');
+    if (location.hash !== target) {
+      history.replaceState(null, '', location.pathname + cleanSearch + target);
+    }
+  }
+
+  function updateSwitcher(mode) {
+    if (!btnShort || !btnFull) return;
+    btnShort.setAttribute('aria-pressed', mode === 'short' ? 'true' : 'false');
+    btnFull.setAttribute('aria-pressed', mode === 'full' ? 'true' : 'false');
+  }
+
+  function applyMode(mode) {
+    body.setAttribute('data-mode', mode);
+    updateSwitcher(mode);
+    syncHash(mode);
+    storageSet(STORAGE_KEY, mode);
+  }
+
+  function showChoice() {
+    body.setAttribute('data-mode', 'unset');
+    if (choiceScreen) choiceScreen.removeAttribute('hidden');
+  }
+
+  function chooseMode(mode) {
+    applyMode(mode);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  function resetMode() {
+    storageRemove(STORAGE_KEY);
+    if (location.search.indexOf('reset') !== -1) {
+      history.replaceState(null, '', location.pathname);
+    }
+    location.hash = '';
+    showChoice();
+  }
+
+  function init() {
+    if (new URLSearchParams(location.search).has('reset')) {
+      resetMode();
+      return;
+    }
+
+    var stored = storageGet(STORAGE_KEY);
+    var fromHash = modeFromHash();
+    var mode = stored || fromHash;
+
+    if (mode === 'short' || mode === 'full') {
+      if (!stored && fromHash) storageSet(STORAGE_KEY, fromHash);
+      applyMode(mode);
+    } else {
+      showChoice();
+    }
+  }
+
+  choiceScreen && choiceScreen.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-choose]');
+    if (!btn) return;
+    chooseMode(btn.getAttribute('data-choose'));
+  });
+
+  btnShort && btnShort.addEventListener('click', function () { chooseMode('short'); });
+  btnFull && btnFull.addEventListener('click', function () { chooseMode('full'); });
+
+  document.querySelectorAll('[data-module-id]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var id = card.getAttribute('data-module-id');
+      var target = document.getElementById('module-' + id);
+      if (!target) return;
+      target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      target.focus({ preventScroll: true });
+    });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  document.querySelectorAll('#reset-link-short, #reset-link-full').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      resetMode();
+    });
+  });
+
+  window.addEventListener('hashchange', function () {
+    if (body.getAttribute('data-mode') === 'unset') return;
+    var fromHash = modeFromHash();
+    if (fromHash && fromHash !== body.getAttribute('data-mode')) {
+      applyMode(fromHash);
+    }
+  });
+
+  init();
+})();
+</script>
 
 </body>
 </html>
