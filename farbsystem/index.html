@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Farbsystem · Lenkstern</title>
+<meta name="description" content="Das Farbsystem der Lenkstern-Plattform — sechs Paletten, sechs Module, ein gemeinsamer Horizont. Begruendet aus einer Trendprognose-Synthese fuer 2036-2046." />
+<meta name="robots" content="index,follow" />
+<link rel="preload" href="/assets/fonts/plex-sans-300-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/plex-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/fonts/fonts.css" />
+<style>
+  :root {
+    --indigo-bg:    #11142E;
+    --indigo-card:  #1a1e3e;
+    --indigo-surf:  #232847;
+    --indigo-border:#3a3f5e;
+    --indigo-muted: #6A6F8C;
+    --indigo-fg:    #E8E6F0;
+    --indigo-fg-2:  #F2F0F8;
+    --plasma:       #FF6A1F;
+    --plasma-soft:  #FFB180;
+    --plasma-deep:  #C24A0C;
+    --maxw: 880px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body {
+    background: var(--indigo-bg);
+    color: var(--indigo-fg);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: clamp(40px, 8vw, 96px) clamp(20px, 4vw, 56px);
+  }
+  ::selection { background: var(--plasma); color: #fff; }
+  a { color: var(--plasma-soft); border-bottom: 1px solid color-mix(in srgb, var(--plasma-soft) 35%, transparent); text-decoration: none; }
+  a:hover { color: var(--plasma); border-bottom-color: var(--plasma); }
+  main { max-width: var(--maxw); margin: 0 auto; }
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 56px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--indigo-border);
+  }
+  .topbar .brand {
+    font-size: 14px; font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--indigo-fg-2);
+    border-bottom: none;
+  }
+  .topbar .brand:hover { color: var(--plasma-soft); }
+  .topbar .ev { color: var(--indigo-muted); font-weight: 400; margin-left: 4px; }
+  .topbar nav { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--indigo-muted); }
+  h1, h2, h3, h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--indigo-fg-2);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(34px, 4.6vw, 52px); line-height: 1.1; font-weight: 500; margin: 0 0 32px; }
+  h2 { font-size: clamp(24px, 2.8vw, 32px); line-height: 1.2; font-weight: 500; margin: 64px 0 20px; padding-top: 32px; border-top: 1px solid color-mix(in srgb, var(--indigo-border) 60%, transparent); }
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 48px; }
+  h3 { font-size: clamp(19px, 2vw, 22px); line-height: 1.3; font-weight: 500; margin: 40px 0 16px; color: var(--plasma-soft); }
+  h4 { font-size: 16px; font-weight: 500; margin: 24px 0 10px; }
+  p { margin: 14px 0; color: #cbd5e1; max-width: 64ch; text-wrap: pretty; }
+  p strong, li strong { color: var(--indigo-fg-2); font-weight: 500; }
+  ul, ol { margin: 14px 0 14px 26px; }
+  li { margin: 6px 0; color: #cbd5e1; }
+  hr {
+    border: none;
+    margin: 56px 0;
+    height: 1px;
+    background: color-mix(in srgb, var(--indigo-border) 70%, transparent);
+  }
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    background: var(--indigo-surf);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--plasma-soft);
+  }
+  .hexcode { display: inline-flex; align-items: center; gap: 6px; background: var(--indigo-card); padding: 3px 8px 3px 4px; }
+  .swatch {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.18);
+    flex-shrink: 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 24px 0;
+    width: 100%;
+    font-size: 14px;
+    background: rgba(15,23,42,0.45);
+    border: 1px solid var(--indigo-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  thead { background: rgba(255,106,31,0.06); }
+  th {
+    text-align: left;
+    padding: 12px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--plasma-soft);
+    font-weight: 500;
+    border-bottom: 1px solid var(--indigo-border);
+  }
+  td {
+    padding: 12px 14px;
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 50%, transparent);
+    color: #cbd5e1;
+    vertical-align: top;
+  }
+  tr:first-child td { border-top: none; }
+  blockquote {
+    margin: 20px 0;
+    padding: 16px 22px;
+    border-left: 3px solid var(--plasma);
+    background: rgba(255,106,31,0.04);
+    color: var(--indigo-fg);
+  }
+  blockquote p { color: var(--indigo-fg); }
+  .footer-back {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--indigo-border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--indigo-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="topbar">
+    <a href="/" class="brand">Lenkstern<span class="ev">e.&nbsp;V. (i.&nbsp;Gr.)</span></a>
+    <nav>Farbsystem · V 1.0</nav>
+  </div>
+  <h1 id="lenkstern-farbsystem">Lenkstern · Farbsystem</h1>
+<p><strong>Föderative Architektur, sechs Paletten, ein gemeinsamer Horizont.</strong>
+Stand: Mai 2026 · Version 1.0</p>
+<hr />
+<h2 id="warum-dieses-dokument-existiert">Warum dieses Dokument existiert</h2>
+<p>Farbe in einer Software für Menschen nach der Reha ist keine Geschmacksfrage. Sie ist Wirkung, bevor das erste Wort gelesen wird. Die Forschung zur Farbpsychologie und langfristigen Trendprognostik — bei WGSN, Pantone, Coloro — behandelt Farbe seit zwei Dekaden als das, was sie für Nutzer\:innen wirklich ist: ein Seismograf, der gesellschaftliche, technologische und ökologische Strömungen vor dem Bewusstsein registriert.</p>
+<p>Lenkstern ist eine Plattform für einen vulnerablen Lebensmoment. Reizüberflutung kann triggern, Vertrauenssignale können tragen, das Falsche zur falschen Zeit kann den Übergang von der Klinik in den Alltag um Wochen zurückwerfen. Die Farben, die hier gewählt sind, basieren deshalb nicht auf Saison-Trends oder Designer-Intuition, sondern auf einer Trendprognose-Synthese für den Zeithorizont 2036–2046 — derselbe Zeitraum, in dem die heute frisch entlassenen Rehabilitand\:innen mitten in ihrem zweiten Lebensabschnitt stehen werden. Wir wählen also nicht für 2026, sondern für die Generation, die mit Lenkstern alt wird.</p>
+<p>Der Bericht macht eine Sache explizit: <strong>Nichts hier ist zufällig.</strong> Jede Farbe trägt eine Funktion, jede Kombination antwortet auf einen Mega-Treiber, jede Palette gehört genau zu dem Modul, in dem ihre Wirkung gebraucht wird.</p>
+<hr />
+<h2 id="die-marke-warum-lenkstern">Die Marke: Warum „Lenkstern"</h2>
+<p>Bevor zur Farbe — kurz zum Namen, weil beide aus derselben Logik stammen.</p>
+<p>Ein <strong>Lenkstern</strong> ist die sternförmige Mutter im Steuersatz eines Fahrrads. Sie sitzt unsichtbar im Gabelschaft. Ihre einzige Aufgabe: die richtige Vorspannung halten, damit das Lenken präzise bleibt. Ohne sie wird die Lenkung unpräzise, der Steuersatz wackelt, die Lager verschleißen schneller. Sie ist ein Kleinteil. Sie ist beim Neuaufbau zwingend.</p>
+<p>Genau das ist die App: ein unsichtbares Kleinteil, das die Vorspannung hält, wenn jemand nach der Reha das eigene Leben neu zusammenschraubt. Die Plattform steht nicht im Vordergrund. Sie macht das Lenken möglich.</p>
+<p>Daraus folgen drei Gestaltungs-Prinzipien, die im Farbsystem durchgehalten werden:</p>
+<ol>
+<li><strong>Werkzeug-Ästhetik, keine Esoterik.</strong> Lenkstern referenziert konkrete Mechanik, kein spirituelles Vokabular. Die Farben sind erdig, technisch, präzise — nicht heilig, nicht warm-flauschig, nicht naiv.</li>
+<li><strong>Aktive statt besitzende Semantik.</strong> „Lenken" tut man. Reha heißt: wieder ins Tun kommen. Die Farben sprechen Bewegung an, nicht Besitz oder Status.</li>
+<li><strong>Struktur trägt, Energie markiert.</strong> Die strukturelle Farbe (Tiefe, Ruhe, Verlässlichkeit) trägt die gesamte Oberfläche. Die energetische Farbe (Akzent, Punkt, Mark) markiert nur, wo Bewegung passiert. Das spiegelt die Mechanik der echten Sternmutter: viel Material, ein präziser Sitz.</li>
+</ol>
+<hr />
+<h2 id="das-trendfundament">Das Trendfundament</h2>
+<p>Der zugrundeliegende Trendbericht synthetisiert vier dokumentierte Megatrend-Kombinationen für 2036–2046 plus mehrere namentlich genannte Sub-Trends. Alle sechs Lenkstern-Paletten ziehen direkt aus diesem Korpus.</p>
+<p><strong>Die vier Hauptkombinationen aus Kapitel 6:</strong></p>
+<ol>
+<li><em>Bioluminescent Cyan + Synthetisches Myzel-Braun</em> — die organisch leuchtende Post-Natur. Treiber: Synthetische Biologie, kontrollierte Bio-Materialien.</li>
+<li><em>Deep Space Indigo + Plasma Orange</em> — die kosmische Tiefe mit einem Energiepunkt. Treiber: Space Age 2.0, Quantencomputing, Future Dusk als neue Grundfarbe statt Schwarz.</li>
+<li><em>Cyber-Green + Tactile Terracotta</em> — der humanistische Widerstand gegen KI-Perfektion. Treiber: Code Brutalism, Anti-Slop-Bewegung, Wiedereinzug von Handarbeit.</li>
+<li><em>Atmospheric Pastels + Digital Metallics</em> — die heilende Demografie. Treiber: Silver Society, Geschlechterfluidität, Barrierefreiheit, "Dusty Sunset" als Atmosphäre einer klimatisch veränderten Welt.</li>
+</ol>
+<p><strong>Zwei explizit benannte Sub-Trends, die wir ebenfalls verwenden:</strong></p>
+<ol start="5">
+<li><em>Digital Sage + Clay</em> (Kapitel 5.4) — die "restorativen, heilenden Farben" für die Silver Society. Klimaresilient, kognitiv unterstimulierend, kokon-bildend.</li>
+<li><em>Luminous Blue + Cashew Milk</em> (Kapitel 4.1/4.2) — die Brücke zwischen Vergangenheit und Zukunft, traditionelles Handwerk plus KI-Innovation, gepaart mit warmem Creme. Markt-Atmosphäre.</li>
+</ol>
+<p>Sechs Paletten, sechs Module. Jede gehört wohin sie gehört.</p>
+<hr />
+<h2 id="die-sechs-paletten">Die sechs Paletten</h2>
+<h3 id="1-dachverband-lenkstern-lenksterneu-vorspannung">1 · Dachverband Lenkstern · <code>lenkstern.eu</code> · <strong>„Vorspannung"</strong></h3>
+<p><strong>Kombination:</strong> Deep Space Indigo + Plasma Orange (Kombi 2)</p>
+<table>
+<thead>
+<tr>
+<th>Rolle</th>
+<th>Farbe</th>
+<th>HEX</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Struktur (Base)</td>
+<td>Deep Space Indigo</td>
+<td><code class="hexcode"><span class="swatch" style="background:#11142E"></span>#11142E</code></td>
+<td>Dominant — Hintergrund, Container, Layout-Grund</td>
+</tr>
+<tr>
+<td>Surface</td>
+<td>Indigo Light</td>
+<td><code class="hexcode"><span class="swatch" style="background:#232847"></span>#232847</code></td>
+<td>Kartenhintergründe, Module-Container</td>
+</tr>
+<tr>
+<td>Lenkstern-Mark</td>
+<td>Plasma Orange</td>
+<td><code class="hexcode"><span class="swatch" style="background:#FF6A1F"></span>#FF6A1F</code></td>
+<td>Einziger sättigungsstarker Punkt — Logo, Brand-Mark, Vorspannungs-Signal</td>
+</tr>
+<tr>
+<td>Akzent weich</td>
+<td>Plasma Soft</td>
+<td><code class="hexcode"><span class="swatch" style="background:#FFB180"></span>#FFB180</code></td>
+<td>Hover-Zustände, sekundäre Highlights</td>
+</tr>
+<tr>
+<td>Text auf Indigo</td>
+<td>Cosmic Foreground</td>
+<td><code class="hexcode"><span class="swatch" style="background:#E8E6F0"></span>#E8E6F0</code></td>
+<td>Haupttext</td>
+</tr>
+<tr>
+<td>Text muted</td>
+<td>Indigo Muted</td>
+<td><code class="hexcode"><span class="swatch" style="background:#6A6F8C"></span>#6A6F8C</code></td>
+<td>Sekundärtext, Metadaten</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Warum diese Kombination für den Dachverband:</strong></p>
+<p>Deep Space Indigo ist im Bericht das Fundament — die Farbe, die "Millennial Gray als basale Neutralfarbe vollständig ersetzt". Sie absorbiert, anstatt zu reflektieren. In einer Plattform für überreizte Menschen ist das die größte Stärke: nichts hier sticht von alleine ins Auge. Die Oberfläche lässt sich anschauen, ohne dass sie zurückschaut.</p>
+<p>Plasma Orange erscheint nur an einer Stelle — als Marke. Als Lenkstern-Punkt. Im Bericht ist dieser Ton "Vitalität, biotechnologische Durchbrüche und kosmische Strahlung" — eine bewusste Anspielung auf das erste Space Age der 1960er, aber "ohne die toxische Naivität des Plastik-Zeitalters der Vergangenheit". Genau das passt zur Plattform: Wir bauen Infrastruktur für eine Zukunft, die wir nicht naiv schönreden, sondern verlässlich tragen.</p>
+<p>Die psychologische Wirkung dieser Kombination beschreibt der Bericht als "Erhabenheit, Resilienz und Entdeckergeist; die perfekte Balance zwischen dem unbekannten, ehrfurchtgebietenden Dunkel und grenzenloser menschlicher Energie". Für den Dachverband, der DRV, Kliniken, SHG-Verbände und Krankenkassen gleichermaßen ansprechen muss, ist genau diese Verbindung tragend: ernsthaft, ohne klinisch zu erstarren.</p>
+<p><strong>Wirkung als Wirkung:</strong> Wer auf <code>lenkstern.eu</code> landet, sieht zuerst ruhige Tiefe. Erst dann den einen Punkt, der Lenkstern markiert. Das ist die Mechanik der echten Sternmutter, in Pixel übersetzt.</p>
+<hr />
+<h3 id="2-modul-1-kern-deinlenksterneu-wurzelwerk">2 · Modul 1 · Kern · <code>dein.lenkstern.eu</code> · <strong>„Wurzelwerk"</strong></h3>
+<p><strong>Kombination:</strong> Bioluminescent Cyan + Synthetisches Myzel-Braun (Kombi 1)</p>
+<table>
+<thead>
+<tr>
+<th>Rolle</th>
+<th>Farbe</th>
+<th>HEX</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identität (alive)</td>
+<td>Bioluminescent Cyan</td>
+<td><code class="hexcode"><span class="swatch" style="background:#4DD0B5"></span>#4DD0B5</code></td>
+<td>Aktive Elemente, persönliche Marker, Pseudonym-Glow</td>
+</tr>
+<tr>
+<td>Cyan weich</td>
+<td>Glow Soft</td>
+<td><code class="hexcode"><span class="swatch" style="background:#8FE3CD"></span>#8FE3CD</code></td>
+<td>Hintergrund-Tinte, Zustands-Highlights</td>
+</tr>
+<tr>
+<td>Wurzel (Base)</td>
+<td>Mycel-Braun</td>
+<td><code class="hexcode"><span class="swatch" style="background:#5C4636"></span>#5C4636</code></td>
+<td>Strukturelle Verankerung</td>
+</tr>
+<tr>
+<td>Wurzel tief</td>
+<td>Mycel Deep</td>
+<td><code class="hexcode"><span class="swatch" style="background:#382820"></span>#382820</code></td>
+<td>Dark-Mode-Hintergrund, schwere Container</td>
+</tr>
+<tr>
+<td>Surface hell</td>
+<td>Cashew Surface</td>
+<td><code class="hexcode"><span class="swatch" style="background:#F2E8DC"></span>#F2E8DC</code></td>
+<td>Light-Mode-Hintergrund</td>
+</tr>
+<tr>
+<td>Erde neutral</td>
+<td>Earth Neutral</td>
+<td><code class="hexcode"><span class="swatch" style="background:#8C7666"></span>#8C7666</code></td>
+<td>Sekundärtext auf hellem Grund</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Warum diese Kombination für den Kern:</strong></p>
+<p>Der Kern speichert nur Pseudonyme, Mitgliedschaft und peer-to-peer-Nachrichten — die intime Substanz dessen, was eine Person an Lenkstern preisgibt. Identität ohne Klarnamen. Verbindung ohne Beobachtung. Das ist exakt das, wofür "Wurzelwerk" steht: ein Myzel.</p>
+<p>Der Bericht beschreibt Synthetisches Myzel-Braun explizit als "im Labor gezüchtete organische Materialien" — also keine zufällig gewachsene Natur, sondern eine bewusst kultivierte. Das ist die richtige Metapher für ein Pseudonym: keine "rohe" Identität, sondern eine kontrollierte. Die Nutzer\:in entscheidet, wer was sieht. Der Kern macht das möglich, ohne sich in den Weg zu stellen.</p>
+<p>Bioluminescent Cyan ergänzt das durch eine "scheinbar selbst leuchtende" Qualität — also etwas, das von innen heraus glimmt, nicht von außen beleuchtet wird. Im Bericht: "Beruhigende Innovation; die unterbewusste Sicherheit, dass die Menschheit die Natur durch hochgradige Technologie gerettet und nachgebaut hat." Für eine identitätstragende Schicht in einer Reha-Plattform ist diese Wirkung der Kernanker: Du leuchtest selbst, niemand muss dich anstrahlen.</p>
+<p><strong>Wirkung als Wirkung:</strong> Im Kern fühlt sich die Oberfläche organisch und warm an, aber nicht weich-esoterisch. Etwas wächst hier — und es ist deins, weil du es selbst kultivierst.</p>
+<hr />
+<h3 id="3-modul-2-shg-grouplenksterneu-abenddammerung">3 · Modul 2 · SHG · <code>group.lenkstern.eu</code> · <strong>„Abenddämmerung"</strong></h3>
+<p><strong>Kombination:</strong> Atmospheric Pastels + Digital Metallics (Kombi 4)</p>
+<table>
+<thead>
+<tr>
+<th>Rolle</th>
+<th>Farbe</th>
+<th>HEX</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lavendel staubig</td>
+<td>Dusty Lavender</td>
+<td><code class="hexcode"><span class="swatch" style="background:#B8A4CC"></span>#B8A4CC</code></td>
+<td>Hauptakzent für Gruppen-Räume</td>
+</tr>
+<tr>
+<td>Pink reif</td>
+<td>Mature Pop Pink</td>
+<td><code class="hexcode"><span class="swatch" style="background:#D49AA0"></span>#D49AA0</code></td>
+<td>Marker für Aktivität, nicht süßlich</td>
+</tr>
+<tr>
+<td>Ice Blue</td>
+<td>Ice Blue</td>
+<td><code class="hexcode"><span class="swatch" style="background:#A8C4D2"></span>#A8C4D2</code></td>
+<td>Ruhe-Container, Termine, Listen</td>
+</tr>
+<tr>
+<td>Chromblau (Metallic)</td>
+<td>Chromatic Blue</td>
+<td><code class="hexcode"><span class="swatch" style="background:#758CAA"></span>#758CAA</code></td>
+<td>Buttons, Aktionen</td>
+</tr>
+<tr>
+<td>Mikrosilber</td>
+<td>Soft Silver</td>
+<td><code class="hexcode"><span class="swatch" style="background:#C8C9D2"></span>#C8C9D2</code></td>
+<td>Trenner, Strukturen</td>
+</tr>
+<tr>
+<td>Text dunkel</td>
+<td>Dusk Foreground</td>
+<td><code class="hexcode"><span class="swatch" style="background:#4A4258"></span>#4A4258</code></td>
+<td>Haupttext (hoch lesbar für Silver Society)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Warum diese Kombination für die SHG-Schicht:</strong></p>
+<p>Selbsthilfegruppen sind die demografisch heterogenste Schicht der Plattform. Hier treffen sich Jung und Alt, alle Geschlechter, alle Bildungs- und Sprachhintergründe, alle Suchtformen. Der Bericht beschreibt Kombi 4 als Antwort auf genau diese Konstellation: "Demografischer Wandel (Silver Society), Gender Fluidity, Barrierefreiheit. Heilung, Fluidität, tiefer Respekt vor dem Alterungsprozess bei gleichzeitiger Integration modernster, unsichtbarer Technologie."</p>
+<p>Die Pastelle sind explizit nicht naiv — der Bericht warnt vor diesem Missverständnis: "Diese Pastelle sind nicht naiv oder süßlich, sondern wirken wie ein staubiger Sonnenuntergang." Das ist die Atmosphäre einer SHG-Sitzung gut beschrieben: nach dem Sturm, aber noch hell genug, um sich zu sehen. Niemand muss noch performen. Es ist Abend.</p>
+<p>Die Digital Metallics sind das Anti-Naive in dieser Palette. Chromblau und Mikrosilber halten die Pastelle davon ab, ins Verspielte zu kippen. Sie geben Struktur, Buttons, Klarheit. Das ist wichtig, weil SHG-Verwaltung präzise sein muss: Termine, Anmeldungen, Pseudonyme.</p>
+<p>Barrierefreiheit ist hier nicht Nachgedanke, sondern Hauptdesign-Anforderung. Der Bericht beschreibt diese Konsumentengruppe als Menschen, die "Farben benötigen, die visuell barrierefrei sind, ausreichende Kontraste bieten, aber das Auge nicht überstimulieren." Das Verhältnis von Pastell-Hintergründen zu Dusk-Foreground (<code class="hexcode"><span class="swatch" style="background:#4A4258"></span>#4A4258</code> auf <code class="hexcode"><span class="swatch" style="background:#A8C4D2"></span>#A8C4D2</code>) ist exakt so kalibriert: hoher Kontrast für Text, aber keine harte Schwarz-auf-Weiß-Aggression.</p>
+<p><strong>Wirkung als Wirkung:</strong> Eine SHG-Sitzung auf Lenkstern fühlt sich nicht nach Krankenhaus an. Nicht nach Selbstoptimierungs-App. Nach einem ruhigen Raum am späten Nachmittag, in dem Menschen reden, wenn sie wollen.</p>
+<hr />
+<h3 id="4-modul-3-therapie-therapielenksterneu-werkstatt">4 · Modul 3 · Therapie · <code>therapie.lenkstern.eu</code> · <strong>„Werkstatt"</strong></h3>
+<p><strong>Kombination:</strong> Cyber-Green + Tactile Terracotta (Kombi 3)</p>
+<table>
+<thead>
+<tr>
+<th>Rolle</th>
+<th>Farbe</th>
+<th>HEX</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cyber-Green (klinisch)</td>
+<td>Clinical Green</td>
+<td><code class="hexcode"><span class="swatch" style="background:#5BC290"></span>#5BC290</code></td>
+<td>Daten-Marker, Audit-Signale, Code-Strukturen</td>
+</tr>
+<tr>
+<td>Cyber Deep</td>
+<td>Terminal Background</td>
+<td><code class="hexcode"><span class="swatch" style="background:#143028"></span>#143028</code></td>
+<td>Dark-Mode-Hintergrund</td>
+</tr>
+<tr>
+<td>Terracotta (Haupt)</td>
+<td>Tactile Terracotta</td>
+<td><code class="hexcode"><span class="swatch" style="background:#BC634A"></span>#BC634A</code></td>
+<td>Hauptakzent, Therapie-Räume</td>
+</tr>
+<tr>
+<td>Terracotta hell</td>
+<td>Warm Highlight</td>
+<td><code class="hexcode"><span class="swatch" style="background:#DFA088"></span>#DFA088</code></td>
+<td>Karten, Übungen</td>
+</tr>
+<tr>
+<td>Terracotta tief</td>
+<td>Deep Earth</td>
+<td><code class="hexcode"><span class="swatch" style="background:#7A3A26"></span>#7A3A26</code></td>
+<td>Strukturelle Kontraste</td>
+</tr>
+<tr>
+<td>Hintergrund</td>
+<td>Earth Surface</td>
+<td><code class="hexcode"><span class="swatch" style="background:#2A1E18"></span>#2A1E18</code></td>
+<td>Container in dunkler Variante</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Warum diese Kombination für Therapie:</strong></p>
+<p>Therapie auf Lenkstern operiert unter <code>§ 203 StGB</code> (Berufsgeheimnis), <code>Art. 9 (2) h DSGVO</code> und eigener DSFA pro Anbieter. Das ist Code-Niveau-Verbindlichkeit. Gleichzeitig ist Therapie buchstäblich das Gegenteil von Algorithmus — sie funktioniert durch eine menschliche Beziehung, die keine KI je reproduzieren wird.</p>
+<p>Der Bericht beschreibt Kombi 3 exakt entlang dieser Spannung: "Der menschliche Widerstand gegen KI-Perfektionismus. Verankerung in der Realität angesichts totaler digitaler Überwachung; der visuelle Triumph des fehlerhaften Humanismus über reine, glatte Algorithmen."</p>
+<p>Cyber-Green ist hier nicht das neon-toxische Terminal-Grün. Es ist ein klinisch gedämpfter Ton, der eine bestimmte Funktion erfüllt: das Sichtbarmachen von Code-Strukturen, Datenklassen, Audit-Logs, Schweigepflicht-Grenzen. Wo immer "Therapie-Daten" als Klasse erscheinen, taucht das Grün auf. Es markiert: Hier gilt Berufsgeheimnis, hier gibt es keine Vermischung mit dem Kern.</p>
+<p>Tactile Terracotta ist der Gegenpol. Im Bericht steht es für "menschliche Handarbeit, uralte Keramik und die unvollkommene Physis des Körpers, die keine KI reproduzieren kann." Das ist das Material, aus dem Therapie tatsächlich besteht: zwei Menschen, ein Raum, Worte und Schweigen. Lenkstern bildet das nicht ab — es schützt es. Die Farbe sagt: was hier passiert, ist von Hand gemacht.</p>
+<p><strong>Wirkung als Wirkung:</strong> Therapeut\:innen sollen sich nicht in einer Tech-Plattform wiederfinden, sondern in einer Werkstatt — wo das Werkzeug sauber, das Material warm, das Handwerk präzise ist. Patient\:innen sollen sich nicht überwacht, sondern handwerklich begleitet fühlen.</p>
+<hr />
+<h3 id="5-modul-4-reha-rehalenksterneu-kokon">5 · Modul 4 · Reha · <code>reha.lenkstern.eu</code> · <strong>„Kokon"</strong></h3>
+<p><strong>Kombination:</strong> Digital Sage + Clay (Kapitel 5.4, restorativ-heilende Sub-Trends)</p>
+<table>
+<thead>
+<tr>
+<th>Rolle</th>
+<th>Farbe</th>
+<th>HEX</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Digital Sage</td>
+<td>Sage Primary</td>
+<td><code class="hexcode"><span class="swatch" style="background:#93A99A"></span>#93A99A</code></td>
+<td>Hauptakzent — Klinik-Räume, Module</td>
+</tr>
+<tr>
+<td>Sage hell</td>
+<td>Sage Light</td>
+<td><code class="hexcode"><span class="swatch" style="background:#C2D1C6"></span>#C2D1C6</code></td>
+<td>Surface-Tinte, ruhige Container</td>
+</tr>
+<tr>
+<td>Sage tief</td>
+<td>Sage Deep</td>
+<td><code class="hexcode"><span class="swatch" style="background:#4F6256"></span>#4F6256</code></td>
+<td>Strukturelle Tiefe, Buttons</td>
+</tr>
+<tr>
+<td>Clay (Mocha)</td>
+<td>Clay Primary</td>
+<td><code class="hexcode"><span class="swatch" style="background:#A18068"></span>#A18068</code></td>
+<td>Wärme-Akzent, Anker, Termine</td>
+</tr>
+<tr>
+<td>Clay tief</td>
+<td>Deep Mocha</td>
+<td><code class="hexcode"><span class="swatch" style="background:#5E4530"></span>#5E4530</code></td>
+<td>Strukturelle Wärme</td>
+</tr>
+<tr>
+<td>Cashew Surface</td>
+<td>Cashew Light</td>
+<td><code class="hexcode"><span class="swatch" style="background:#EBE2D2"></span>#EBE2D2</code></td>
+<td>Light-Mode-Hintergrund</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Warum diese Kombination für Reha:</strong></p>
+<p>Reha ist die institutionellste, zugleich verletzlichste Schicht. Hier ist die Person noch in der Klinik, die Daten laufen unter <code>Art. 9 (2) h DSGVO</code>, die Klinik ist Mit-Verantwortliche, DRV ist potenzieller Leistungsträger. Gleichzeitig: die Person ist mitten in der körperlichen und psychischen Restrukturierung. Reizüberflutung ist hier am gefährlichsten.</p>
+<p>Kapitel 5.4 des Trendberichts beschreibt diese Anforderung exakt: "Die chronische Angst vor dem Kollaps und die Informationsüberflutung werden ein massives psychologisches Bedürfnis nach Trost, Geborgenheit und Rückzugsfähigkeit auslösen. […] raumabsorbierende Neutraltöne weiterentwickeln, die eine Art visuellen Kokon bilden."</p>
+<p>Digital Sage ist im Bericht explizit als "technologisches Grün" benannt, das "stark mit Wasser, Kühle und ökologischer Erneuerung assoziiert" wird. In der Reha bedeutet das: Atmen. Pause. Nicht stimulierend.</p>
+<p>Clay (eine Evolution von Mocha Mousse) liefert die haptische Erdung. Der Bericht: "Im immateriellen digitalen Zeitalter eine dringend benötigte physische Verankerung." Genau das braucht eine Reha-Schicht: bei aller App-Funktionalität soll spürbar bleiben, dass der eigene Körper auf einem realen Boden steht.</p>
+<p>Diese Palette ist absichtlich die ruhigste der sechs. Sie hat keinen "Energiepunkt", keinen Plasma-Akzent, kein leuchtendes Cyan. Das ist Funktion, nicht Verzicht: in der Reha braucht niemand zusätzliche Energie. Niemand braucht eine App, die Motivation schreit. Was gebraucht wird, ist Verlässlichkeit ohne Reibung.</p>
+<p><strong>Wirkung als Wirkung:</strong> Wer von einer Therapiestunde zurück auf das Handy schaut, soll keine Plattform sehen, die ihn ansaugt. Sondern eine, die sich neben ihn setzt und Ruhe gibt.</p>
+<hr />
+<h3 id="6-modul-5-community-communitylenksterneu-marktplatz">6 · Modul 5 · Community · <code>community.lenkstern.eu</code> · <strong>„Marktplatz"</strong></h3>
+<p><strong>Kombination:</strong> Luminous Blue + Cashew Milk (Kapitel 4.1/4.2, Brücken-Sub-Trends)</p>
+<table>
+<thead>
+<tr>
+<th>Rolle</th>
+<th>Farbe</th>
+<th>HEX</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Luminous Blue</td>
+<td>Bridge Blue</td>
+<td><code class="hexcode"><span class="swatch" style="background:#2A7AC8"></span>#2A7AC8</code></td>
+<td>Hauptakzent — Anbieter-Marker, Veranstaltungen</td>
+</tr>
+<tr>
+<td>Luminous tief</td>
+<td>Deep Bridge</td>
+<td><code class="hexcode"><span class="swatch" style="background:#15467A"></span>#15467A</code></td>
+<td>Strukturelle Tiefe</td>
+</tr>
+<tr>
+<td>Luminous hell</td>
+<td>Open Sky</td>
+<td><code class="hexcode"><span class="swatch" style="background:#7BAEE0"></span>#7BAEE0</code></td>
+<td>Hover-Zustände, weiche Highlights</td>
+</tr>
+<tr>
+<td>Cashew Milk</td>
+<td>Cashew Surface</td>
+<td><code class="hexcode"><span class="swatch" style="background:#EEE2C9"></span>#EEE2C9</code></td>
+<td>Hintergrund — warme Offenheit</td>
+</tr>
+<tr>
+<td>Cashew warm</td>
+<td>Market Amber</td>
+<td><code class="hexcode"><span class="swatch" style="background:#D6A876"></span>#D6A876</code></td>
+<td>Externe Anbieter-Signale, Vertragsmarker</td>
+</tr>
+<tr>
+<td>Neutral</td>
+<td>Market Neutral</td>
+<td><code class="hexcode"><span class="swatch" style="background:#6E7280"></span>#6E7280</code></td>
+<td>Text, Metadaten</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Warum diese Kombination für Community:</strong></p>
+<p>Community ist die föderale Außenschicht. Hier docken externe Anbieter, Veranstalter, andere Vereine an. Jeder bringt seine eigene Rechtsform, eigene Haftung, eigenes Datenmodell. Lenkstern stellt nur den Rahmen, den API-Vertrag, das Audit-Log. Drinnen sind viele.</p>
+<p>Der Bericht beschreibt Luminous Blue (WGSN Farbe des Jahres 2027) als "Brücke zwischen Vergangenheit und Zukunft, die traditionelles Handwerk mit künstlicher Intelligenz und digitaler Innovation verbindet." Das ist exakt die Rolle der Community-Schicht: alte, etablierte Strukturen (Selbsthilfeverbände, Vereine, lokale Anbieter) treffen auf neue digitale Andockungen.</p>
+<p>Cashew Milk ist die warme Creme aus den 2020er Mode-Trends, im Bericht als "Cashew Milk, ein warmes Creme, das in der Mode derzeit dominiert" referenziert. Sie liefert eine Atmosphäre von offener Wärme — wie der Hauptraum eines Begegnungszentrums, in dem mehrere Anbieter Stände haben. Marktplatz, nicht Filiale.</p>
+<p>Diese Palette ist die offenste der sechs. Sie verträgt, dass externe Anbieter eigene Akzentfarben mitbringen — solange sich diese in den warmen Cashew-Grundton einbetten lassen. Lenkstern markiert die Container-Kanten in Luminous Blue (das Signal: "Du verlässt jetzt den Kern, du bist im externen Bereich"), der Anbieter darf den Inhalt selbst farbig gestalten.</p>
+<p><strong>Wirkung als Wirkung:</strong> Wer in die Community-Schicht eintritt, soll sofort spüren: Hier gibt es Vielfalt, hier sind viele Stimmen, hier ist Aufnahme — aber auch klar, dass dies eine eigene Schicht ist, nicht der Kern. Der Lenkstern-Rahmen bleibt sichtbar, das Innere ist beweglich.</p>
+<hr />
+<h2 id="die-logik-der-familie">Die Logik der Familie</h2>
+<p>Die sechs Paletten bilden bewusst eine Familie mit klaren Beziehungen, nicht sechs isolierte Inseln. Drei strukturelle Prinzipien halten sie zusammen:</p>
+<p><strong>Erstens · Tiefe statt Hell-Hell-Hell.</strong> Fünf der sechs Paletten haben einen tiefen, fast schweren Grundton (Deep Space Indigo, Mycel-Braun, Dusk Foreground, Terminal Green/Earth Surface, Sage Deep, Deep Bridge). Nur eine ist primär hell-warm (Cashew Surface in Community). Das spiegelt die Realität der Zielgruppe: Reha-bezogene Software muss tragen, nicht aufjubeln. Der Bericht beschreibt diesen Megatrend als "raumabsorbierende Neutraltöne, die eine Art visuellen Kokon bilden" — wir folgen dem konsequent.</p>
+<p><strong>Zweitens · Ein Mark, kein Karneval.</strong> Jede Palette hat genau einen Akzentpunkt (Plasma Orange im Dachverband, Bioluminescent Cyan im Kern, Dusty Lavender in der SHG, Terracotta in Therapie, Clay in Reha, Luminous Blue in Community). Es gibt keine Modul-Oberfläche mit drei oder vier konkurrierenden Signalfarben. Das ist Anti-Reizüberflutung als Designprinzip — und gleichzeitig die Mechanik des Lenksterns (eine präzise Vorspannung, keine fünf).</p>
+<p><strong>Drittens · Erkennbarkeit durch Familie, Unterscheidbarkeit durch Akzent.</strong> Wer von der SHG-Sitzung in den Reha-Raum wechselt, soll sofort merken: Ich bin woanders. Aber: Ich bin nicht in einer anderen App. Die Dachverband-Tiefe trägt unter allen Modulen. Die Akzentfarben unterscheiden klar, was gerade gilt — Kern, SHG, Therapie, Reha, Community. Die Föderation wird damit nicht nur juristisch und architektonisch sichtbar, sondern auch visuell sofort lesbar.</p>
+<hr />
+<h2 id="future-forward-warum-wir-fur-2046-wahlen-nicht-fur-2026">Future-Forward: Warum wir für 2046 wählen, nicht für 2026</h2>
+<p>Eine Designentscheidung im Mai 2026 mit einem Trendbericht zu rechtfertigen, der den Zeitraum 2036–2046 prognostiziert, klingt überdimensioniert. Sie ist es nicht. Drei Gründe:</p>
+<p><strong>Erstens · Lenkstern ist Infrastruktur, nicht Kampagne.</strong> Die Plattform wird nicht in zwei Jahren wieder ersetzt. Wenn wir jetzt eine Saison-Palette wählen, ist sie 2030 schon stark veraltet, 2035 unangenehm, 2040 lächerlich. Wenn wir aus dem Zukunfts-Vokabular wählen, altert die Oberfläche entweder gar nicht oder altert in die Aktualität <em>hinein</em>. Das ist die mathematische Logik der Trendzyklen: was als nächstes Mainstream wird, ist heute schon in den Megatrend-Berichten.</p>
+<p><strong>Zweitens · Die Zielgruppe altert mit.</strong> Wer 2026 mit 30 in die Reha geht, ist 2046 mit 50 immer noch Teil der Plattform. Wer 2026 mit 55 in die Reha geht, ist 2046 mit 75 Teil der Silver Society, für die zwei der sechs Paletten (Abenddämmerung, Kokon) explizit ausgelegt sind. Die Farben sind auch eine Versicherung: dieses System wird nicht zu jung für seine Nutzer\:innen.</p>
+<p><strong>Drittens · Wirkung ist nicht verhandelbar.</strong> Bei einer Reha-Plattform ist Farbpsychologie keine Schmuck-Frage. Die Farben tragen oder triggern. Wer hier auf Bauchgefühl gestaltet, gefährdet Nutzer\:innen. Die Trendforschungs-Methodik bei WGSN, Pantone und Coloro ist die einzige öffentlich verfügbare wissenschaftliche Grundlage, die Farbe an Megatrends wie Klimaresilienz, Silver Society, Anti-KI-Backlash und synthetischer Biologie verknüpft — also genau die Themen, die das Leben unserer Nutzer\:innen in den kommenden zwanzig Jahren prägen.</p>
+<hr />
+<h2 id="zusammenfassung-als-tabelle">Zusammenfassung als Tabelle</h2>
+<table>
+<thead>
+<tr>
+<th>Modul</th>
+<th>Domain</th>
+<th>Palette</th>
+<th>Code-Name</th>
+<th>Kernwirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dachverband</td>
+<td><code>lenkstern.eu</code></td>
+<td>Deep Space Indigo + Plasma Orange</td>
+<td><strong>Vorspannung</strong></td>
+<td>Tiefe, die trägt; ein Energiepunkt, der markiert</td>
+</tr>
+<tr>
+<td>M1 Kern</td>
+<td><code>dein.lenkstern.eu</code></td>
+<td>Bioluminescent Cyan + Mycel-Braun</td>
+<td><strong>Wurzelwerk</strong></td>
+<td>Kultivierte Identität, organische Verankerung</td>
+</tr>
+<tr>
+<td>M2 SHG</td>
+<td><code>group.lenkstern.eu</code></td>
+<td>Pastels + Digital Metallics</td>
+<td><strong>Abenddämmerung</strong></td>
+<td>Heilende Demografie, fluide Identitäten, Barrierefreiheit</td>
+</tr>
+<tr>
+<td>M3 Therapie</td>
+<td><code>therapie.lenkstern.eu</code></td>
+<td>Cyber-Green + Tactile Terracotta</td>
+<td><strong>Werkstatt</strong></td>
+<td>Code-Verbindlichkeit plus handwerkliche Wärme</td>
+</tr>
+<tr>
+<td>M4 Reha</td>
+<td><code>reha.lenkstern.eu</code></td>
+<td>Digital Sage + Clay</td>
+<td><strong>Kokon</strong></td>
+<td>Maximale Ruhe, keine Stimulation, klinisches Atmen</td>
+</tr>
+<tr>
+<td>M5 Community</td>
+<td><code>community.lenkstern.eu</code></td>
+<td>Luminous Blue + Cashew Milk</td>
+<td><strong>Marktplatz</strong></td>
+<td>Offene Brücke, viele Anbieter, ein Rahmen</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="nachster-schritt">Nächster Schritt</h2>
+<p>Das Logo. Der Lenkstern als physisches Objekt — die fünf- oder sechsspitzige Sternmutter im Steuersatz — liefert schon die geometrische Grundform. Plasma Orange als einziger Akzent, Deep Space Indigo als Trägerfläche. Wir bauen es im nächsten Pass.</p>
+  <div class="footer-back">
+    <a href="/">← Zur Startseite</a>
+    <span>Stand Mai 2026</span>
+  </div>
+</main>
+</body>
+</html>
