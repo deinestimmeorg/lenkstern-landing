@@ -797,6 +797,79 @@
   }
 
   /* ====================================
+     Offen gebaut
+     ==================================== */
+  .open-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 880px) {
+    .open-grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+  .open-col {
+    border: 1px solid var(--indigo-border);
+    border-radius: 12px;
+    padding: 28px clamp(20px, 3vw, 32px);
+    background: rgba(15,23,42,0.45);
+  }
+  .open-h {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--plasma-soft);
+    margin-bottom: 22px;
+  }
+  .open-list { list-style: none; padding: 0; margin: 0; }
+  .open-list li {
+    padding: 16px 0;
+    border-top: 1px solid color-mix(in srgb, var(--indigo-border) 55%, transparent);
+  }
+  .open-list li:first-child { border-top: none; padding-top: 0; }
+  .open-list li:last-child { padding-bottom: 0; }
+  .open-item-k {
+    display: block;
+    color: var(--indigo-fg-2);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .open-item-v {
+    display: block;
+    font-size: 14px;
+    color: #cbd5e1;
+    line-height: 1.5;
+  }
+  .open-item-v a {
+    color: var(--plasma-soft);
+    border-bottom: 1px solid color-mix(in srgb, var(--plasma-soft) 35%, transparent);
+  }
+  .open-item-v a:hover {
+    color: var(--plasma);
+    border-bottom-color: var(--plasma);
+  }
+  .open-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(255,106,31,0.08);
+    border: 1px solid color-mix(in srgb, var(--plasma) 30%, transparent);
+    color: var(--plasma-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .open-list-neg .open-item-k::before {
+    content: '\2715\00a0\00a0';
+    color: var(--plasma);
+    font-weight: 400;
+  }
+
+  /* ====================================
      Warum jetzt
      ==================================== */
   .why-grid {
@@ -1320,6 +1393,7 @@
       <a href="#module" class="hide-sm">Module</a>
       <a href="#haltung" class="hide-sm">Haltung</a>
       <a href="#recht" class="hide-sm">Recht</a>
+      <a href="#offen" class="hide-sm">Offen gebaut</a>
       <a href="#stand" class="hide-sm">Stand</a>
       <a href="#kontakt" class="cta">Kontakt</a>
     </nav>
@@ -1760,6 +1834,98 @@
   </div>
 </section>
 
+<!-- ============= OFFEN GEBAUT ============= -->
+<section class="block" id="offen">
+  <div class="container">
+    <div class="section-label">Offen gebaut</div>
+    <h2 class="section-h">Was wir nicht in Black Boxes packen.</h2>
+    <p class="section-sub">
+      Vertrauen entsteht durch Nachprüfbarkeit. Hier liegt offen, woraus
+      Lenkstern gebaut ist und was wir bewusst weglassen.
+    </p>
+
+    <div class="open-grid">
+      <div class="open-col">
+        <div class="open-h">Was offen liegt</div>
+        <ul class="open-list">
+          <li>
+            <span class="open-item-k">Landing-Quellcode</span>
+            <span class="open-item-v">
+              <a href="https://codeberg.org/GeroStrauss/lenkstern-landing" target="_blank" rel="noopener">codeberg.org/GeroStrauss/lenkstern-landing</a>
+              <span class="open-tag">public</span>
+            </span>
+          </li>
+          <li>
+            <span class="open-item-k">App-Quellcode</span>
+            <span class="open-item-v">
+              Codeberg, privat im Pilot.
+              <span class="open-tag">AGPL ab Q3 2026</span>
+            </span>
+          </li>
+          <li>
+            <span class="open-item-k">Datenbank</span>
+            <span class="open-item-v">
+              Supabase, selbst gehostet auf Hetzner-DE.
+              <span class="open-tag">Postgres · keine US-Cloud</span>
+            </span>
+          </li>
+          <li>
+            <span class="open-item-k">Mail-Versand</span>
+            <span class="open-item-v">
+              CleverReach, Rastede.
+              <span class="open-tag">AVV signiert 24.05.2026</span>
+            </span>
+          </li>
+          <li>
+            <span class="open-item-k">Mail-Postfach</span>
+            <span class="open-item-v">
+              Proton Mail Essentials Business.
+              <span class="open-tag">CH · EU-Adequacy · DPA</span>
+            </span>
+          </li>
+          <li>
+            <span class="open-item-k">DNS &amp; Domain</span>
+            <span class="open-item-v">
+              INWX, Berlin.
+              <span class="open-tag">AVV signiert 22.05.2026</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="open-col">
+        <div class="open-h">Was wir bewusst nicht nutzen</div>
+        <ul class="open-list open-list-neg">
+          <li>
+            <span class="open-item-k">Google-Fonts-CDN</span>
+            <span class="open-item-v">Schriften liegen lokal. Keine IP-Weitergabe an Google beim Pageload.</span>
+          </li>
+          <li>
+            <span class="open-item-k">Tracking-Tools auf der Landing</span>
+            <span class="open-item-v">Kein Google Analytics, kein Plausible-Cloud, kein Pendant. Server-Logs werden nicht für Profile genutzt.</span>
+          </li>
+          <li>
+            <span class="open-item-k">Tracking-Pixel im Newsletter</span>
+            <span class="open-item-v">In CleverReach deaktiviert. Click-Tracking nur opt-in.</span>
+          </li>
+          <li>
+            <span class="open-item-k">US-Hyperscaler für Art-9-Daten</span>
+            <span class="open-item-v">Kein AWS, kein Azure, kein GCP für Reha- und Gesundheitsdaten.</span>
+          </li>
+          <li>
+            <span class="open-item-k">Cookies ohne Notwendigkeit</span>
+            <span class="open-item-v">Nur technisch zwingende Session-Cookies in der App. Kein Consent-Banner-Theater.</span>
+          </li>
+          <li>
+            <span class="open-item-k">CDN mit Auslandsrouting</span>
+            <span class="open-item-v">Kein Cloudflare, kein Fastly. Datenflüsse bleiben in Deutschland und EU.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============= WHY NOW ============= -->
 <section class="block" id="warum">
   <div class="container">
@@ -1930,6 +2096,7 @@
         <ul>
           <li><a href="#haltung">Haltung</a></li>
           <li><a href="#recht">Rechtstrennung</a></li>
+          <li><a href="#offen">Offen gebaut</a></li>
           <li><a href="#stand">Stand</a></li>
           <li><a href="#warum">Warum jetzt</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
