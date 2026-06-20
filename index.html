@@ -30,6 +30,7 @@
     --c-reha:      #b87333;
     --c-community: #0ea5e9;
     --c-markt:     #f59e0b;
+    --c-verband:   #c084fc;
 
     --maxw: 1280px;
   }
@@ -446,9 +447,6 @@
     transition: background .15s ease;
   }
   .module:first-child { border-top: none; }
-  .module:hover {
-    background: rgba(255,106,31,0.04);
-  }
   .module-codename {
     display: inline-flex; align-items: center; gap: 12px;
     font-size: 22px; font-weight: 500;
@@ -593,6 +591,18 @@
     color: #94a3b8;
     max-width: 70ch;
     text-wrap: pretty;
+  }
+  .doctrine-src, .short-src {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--indigo-muted);
+    max-width: 70ch;
+  }
+  .doctrine-src a, .short-src a {
+    color: var(--plasma);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   .doctrine-list {
     display: grid;
@@ -1284,18 +1294,6 @@
   /* ====================================
      Module cards — klickbar
      ==================================== */
-  button.module-card {
-    width: 100%; text-align: left;
-    border: none; background: transparent;
-    cursor: pointer;
-    font: inherit; color: inherit;
-  }
-  button.module-card:focus-visible {
-    outline: 2px solid var(--plasma-soft);
-    outline-offset: -2px;
-    background: rgba(255,106,31,0.06);
-  }
-
   .module-detail {
     scroll-margin-top: 88px;
     padding-top: clamp(32px, 4vw, 48px);
@@ -1426,6 +1424,9 @@
             wohnen nicht neben dir, wenn du entlassen wirst. Genau in dieser Lücke passieren die
             meisten Rückfälle — nicht, weil der Wille fehlt, sondern weil niemand mehr da ist,
             wenn der Mittwochabend lang wird.
+          </p>
+          <p class="short-src">
+            Beleg: <a href="https://register.awmf.org/de/leitlinien/detail/076-001" target="_blank" rel="noopener noreferrer">S3-Leitlinie alkoholbezogene Störungen</a> (Stand 2025) — rund 30&nbsp;% der Rückfälle im ersten Monat nach Entlassung, 83&nbsp;% bis zum sechsten Monat.
           </p>
           <p>
             <b>Lenkstern schließt die Lücke, bevor sie aufgeht.</b> Du findest deine Selbsthilfegruppe
@@ -1571,95 +1572,62 @@
 <section class="block" id="module">
   <div class="container">
     <div class="section-label">Module</div>
-    <h2 class="section-h">Fünf Bereiche, ein Horizont.</h2>
+    <h2 class="section-h">Sieben Module, ein Horizont.</h2>
     <p class="section-sub">
       Jedes Modul hat seine eigene Adresse und Verantwortung.
-      Klick auf ein Modul, um mehr zu sehen.
     </p>
 
     <div class="modules">
-      <button type="button" class="module module-card" data-module-id="reha" aria-label="Modul Reha — Details anzeigen">
+      <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-reha);"></span> Reha</div>
         <p class="module-desc">Begleitung während und nach der stationären Reha-Kur.</p>
         <div class="module-host mono">reha<span class="sub">.lenkstern.eu</span></div>
         <span class="module-status pilot">Pilot 06/2026</span>
-      </button>
+      </div>
 
-      <button type="button" class="module module-card" data-module-id="dein" aria-label="Modul Kern — Details anzeigen">
+      <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-kern);"></span> Kern</div>
         <p class="module-desc">Dein pseudonymes Profil — die Basis für alles Weitere.</p>
         <div class="module-host mono">dein<span class="sub">.lenkstern.eu</span></div>
         <span class="module-status">In Planung</span>
-      </button>
+      </div>
 
-      <button type="button" class="module module-card" data-module-id="group" aria-label="Modul SHG — Details anzeigen">
+      <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-shg);"></span> SHG</div>
         <p class="module-desc">Selbsthilfegruppen — Termine, Austausch, Vernetzung.</p>
         <div class="module-host mono">group<span class="sub">.lenkstern.eu</span></div>
         <span class="module-status">In Planung</span>
-      </button>
+      </div>
 
-      <button type="button" class="module module-card" data-module-id="therapie" aria-label="Modul Therapie — Details anzeigen">
+      <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-therapie);"></span> Therapie</div>
         <p class="module-desc">Ambulante Begleitung — getrennt geschützt, § 203 im Code.</p>
         <div class="module-host mono">therapie<span class="sub">.lenkstern.eu</span></div>
         <span class="module-status">In Planung</span>
-      </button>
+      </div>
 
-      <button type="button" class="module module-card" data-module-id="community" aria-label="Modul Community — Details anzeigen">
+      <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-community);"></span> Community</div>
-        <p class="module-desc">Öffentlicher Austausch — pseudonym, ohne Datenverkauf.</p>
+        <p class="module-desc">Betroffene unter sich — pseudonymer Austausch und eigene Angebote, ohne Datenverkauf.</p>
         <div class="module-host mono">community<span class="sub">.lenkstern.eu</span></div>
         <span class="module-status">In Planung</span>
-      </button>
+      </div>
+
+      <div class="module">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-markt);"></span> Markt</div>
+        <p class="module-desc">Externe Anbieter fürs Leben danach — Sportverein, Yoga, Musik, Garten, Retreats, Workshops, Weiterbildung.</p>
+        <div class="module-host mono">markt<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status">In Planung</span>
+      </div>
+
+      <div class="module">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-verband);"></span> Verband</div>
+        <p class="module-desc">Der e.&nbsp;V. auf Augenhöhe mit den Partnern — vertritt die Interessen der Nutzenden, ohne dass sie Mitglied sein müssen.</p>
+        <div class="module-host mono">verband<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status">In Planung</span>
+      </div>
     </div>
 
-    <div class="module-details">
-      <article class="module-detail" id="module-reha" tabindex="-1" aria-labelledby="module-reha-title">
-        <div class="module-detail-head">
-          <span class="swatch" style="background: var(--c-reha);"></span>
-          <h3 id="module-reha-title">Reha</h3>
-          <span class="module-detail-host mono">reha.lenkstern.eu</span>
-        </div>
-        <p class="module-detail-placeholder">Inhalt folgt</p>
-      </article>
-
-      <article class="module-detail" id="module-dein" tabindex="-1" aria-labelledby="module-dein-title">
-        <div class="module-detail-head">
-          <span class="swatch" style="background: var(--c-kern);"></span>
-          <h3 id="module-dein-title">Kern</h3>
-          <span class="module-detail-host mono">dein.lenkstern.eu</span>
-        </div>
-        <p class="module-detail-placeholder">Inhalt folgt</p>
-      </article>
-
-      <article class="module-detail" id="module-group" tabindex="-1" aria-labelledby="module-group-title">
-        <div class="module-detail-head">
-          <span class="swatch" style="background: var(--c-shg);"></span>
-          <h3 id="module-group-title">SHG</h3>
-          <span class="module-detail-host mono">group.lenkstern.eu</span>
-        </div>
-        <p class="module-detail-placeholder">Inhalt folgt</p>
-      </article>
-
-      <article class="module-detail" id="module-therapie" tabindex="-1" aria-labelledby="module-therapie-title">
-        <div class="module-detail-head">
-          <span class="swatch" style="background: var(--c-therapie);"></span>
-          <h3 id="module-therapie-title">Therapie</h3>
-          <span class="module-detail-host mono">therapie.lenkstern.eu</span>
-        </div>
-        <p class="module-detail-placeholder">Inhalt folgt</p>
-      </article>
-
-      <article class="module-detail" id="module-community" tabindex="-1" aria-labelledby="module-community-title">
-        <div class="module-detail-head">
-          <span class="swatch" style="background: var(--c-community);"></span>
-          <h3 id="module-community-title">Community</h3>
-          <span class="module-detail-host mono">community.lenkstern.eu</span>
-        </div>
-        <p class="module-detail-placeholder">Inhalt folgt</p>
-      </article>
-    </div>
   </div>
 </section>
 
@@ -1681,21 +1649,20 @@
     </div>
 
     <div class="doctrine">
-      <div class="doctrine-statement" style="margin-top: 32px;">
-        Datensicherheit für Menschen in Reha ist keine <b>Luxusfrage</b>. Sie ist eine <b>Würdefrage</b>.
+      <div class="doctrine-statement" style="margin-top: 48px;">
+        Was nach der Reha trägt: <b>Begleitung, die weitergeht</b> —
+        und ein <b>Rahmen, der schützt</b>.
       </div>
       <p class="doctrine-why">
-        Wenn Klinik-Daten in Schlagzeilen geraten, läuft eine stille Annahme mit:
-        höchste Datensicherheit sei eine Sache des Budgets. Lenkstern bricht damit —
-        nicht durch eigene Krypto-Erfindungen, sondern durch das Gegenteil:
-        auditierbare Standards (Argon2id, AES-GCM, TLS&nbsp;1.3), saubere Trennung
-        der Module und einen Hebel, den es vor zwei Jahren noch nicht gab — KI-Werkzeuge,
-        die einem kleinen Team das Architektur-Niveau eröffnen, für das früher eine
-        Abteilung nötig war. Würde im digitalen Raum darf nicht vom Budget abhängen —
-        nicht für die, die ohnehin am wenigsten Schutz mitbringen.
+        Rund drei von vier Menschen bleiben nach abgeschlossener Adaption ein Jahr
+        abstinent — wenn die Bindung danach hält. Genau diese Wochen trägt Lenkstern,
+        in einem Rahmen, der von der Bauweise her sicher ist.
+      </p>
+      <p class="doctrine-src">
+        Quelle: <a href="https://www.sucht.de/wp-content/uploads/2022/09/FVS-Katamnese-EJ-2019-Adaption.pdf" target="_blank" rel="noopener noreferrer">FVS-Katamnese EJ&nbsp;2019 (Adaption)</a>, Stand 2022.
       </p>
 
-      <div class="doctrine-list" style="margin-top: 40px;">
+      <div class="doctrine-list" style="margin-top: 56px;">
         <div class="doctrine-item">
           <h4>Infrastruktur, nicht Produkt.</h4>
           <p>Wer mit Lenkstern alt werden soll, braucht eine Plattform, die ihn überlebt.
@@ -1981,9 +1948,9 @@
     <div class="timeline">
       <div class="tl live">
         <div class="when"><span class="dot"></span> Heute</div>
-        <div class="what">Reha-Pilot · Werkstatt</div>
-        <div class="note">Erste stationäre Kooperationsklinik. Co-Creation während der
-          laufenden Reha-Phase, nicht am Schreibtisch.</div>
+        <div class="what">Reha-Pilot · Anfrage gestellt</div>
+        <div class="note">Anfrage an die erste stationäre Klinik ist raus. Geplant ist
+          Co-Creation während der laufenden Reha-Phase, nicht am Schreibtisch.</div>
       </div>
       <div class="tl">
         <div class="when"><span class="dot"></span> Als Nächstes</div>
@@ -2236,22 +2203,6 @@
 
   btnShort && btnShort.addEventListener('click', function () { chooseMode('short'); });
   btnFull && btnFull.addEventListener('click', function () { chooseMode('full'); });
-
-  document.querySelectorAll('[data-module-id]').forEach(function (card) {
-    card.addEventListener('click', function () {
-      var id = card.getAttribute('data-module-id');
-      var target = document.getElementById('module-' + id);
-      if (!target) return;
-      target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
-      target.focus({ preventScroll: true });
-    });
-    card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
 
   document.querySelectorAll('#reset-link-short, #reset-link-full').forEach(function (link) {
     link.addEventListener('click', function (e) {
