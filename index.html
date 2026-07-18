@@ -1290,7 +1290,7 @@
     background: var(--plasma);
     box-shadow: 0 0 10px rgba(255,106,31,0.5);
   }
-  .short-cta { margin-top: 36px; }
+  .short-cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
 
   /* ====================================
      Module cards — klickbar
@@ -1402,6 +1402,31 @@
     text-wrap: pretty;
   }
   .einstieg-card .door-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .hilfe-strip {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border: 1px solid var(--indigo-border);
+    border-left: 3px solid var(--plasma);
+    border-radius: 14px;
+    background: rgba(15,23,42,0.35);
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    gap: 10px 28px;
+  }
+  .hilfe-strip p {
+    flex: 1 1 380px;
+    font-size: 16px; line-height: 1.6;
+    color: var(--indigo-fg);
+    text-wrap: pretty;
+  }
+  .hilfe-strip p b { color: var(--indigo-fg-2); font-weight: 500; }
+  .hilfe-strip-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: var(--plasma-soft);
+    white-space: nowrap;
+  }
+  .hilfe-strip-link:hover { color: var(--plasma); }
   @media (max-width: 980px) {
     .doors { grid-template-columns: 1fr; }
     .einstieg-extra { grid-template-columns: 1fr; }
@@ -1605,6 +1630,14 @@
             aus der Reha in die Adaption, aus der Adaption nach Hause. Von dort
             gründest du Communities, Gruppen leben unter group.lenkstern (im Aufbau).
           </p>
+          <div class="hilfe-strip">
+            <p>
+              <b>Mitten im Konsum?</b> Es gibt eine Tür, die ohne alles funktioniert:
+              kein Konto, keine Fragen, keine Wartezeit. Notfallnummern und der Weg
+              zur Entgiftung, für Betroffene und Angehörige.
+            </p>
+            <a href="https://dein.lenkstern.eu/hilfe-jetzt" class="hilfe-strip-link" rel="noopener">dein.lenkstern.eu/hilfe-jetzt →</a>
+          </div>
         </div>
 
         <div class="short-section">
@@ -1617,6 +1650,9 @@
           <div class="short-cta">
             <a href="https://dein.lenkstern.eu" class="btn btn--primary" rel="noopener">
               Zu deinem Bereich <span class="arrow">→</span>
+            </a>
+            <a href="https://dein.lenkstern.eu/community/start" class="btn btn--ghost" rel="noopener">
+              Community beitreten <span class="arrow">→</span>
             </a>
             <a href="mailto:tester@lenkstern.eu?subject=Lenkstern%20%C2%B7%20Tester%20werden" class="btn btn--ghost">
               Tester werden <span class="arrow">→</span>
@@ -1749,6 +1785,15 @@
       </div>
     </div>
 
+    <div class="hilfe-strip">
+      <p>
+        <b>Mitten im Konsum?</b> Es gibt eine Tür, die ohne alles funktioniert:
+        kein Konto, keine Fragen, keine Wartezeit. Notfallnummern und der Weg
+        zur Entgiftung, für Betroffene und Angehörige.
+      </p>
+      <a href="https://dein.lenkstern.eu/hilfe-jetzt" class="hilfe-strip-link" rel="noopener">dein.lenkstern.eu/hilfe-jetzt →</a>
+    </div>
+
     <div class="einstieg-extra">
       <div class="einstieg-card">
         <h3>Dein Stern wandert mit.</h3>
@@ -1763,11 +1808,15 @@
         <h3>Gemeinsam weiterbauen.</h3>
         <p>
           Über <span class="mono">dein.lenkstern</span> kann jeder eine Community
-          gründen: einen Ort für Menschen, die dasselbe tragen. Gruppen mit festen
+          gründen: einen Ort für Menschen, die dasselbe tragen. Beitreten geht
+          ohne E-Mail und ohne Handynummer. Gruppen mit festen
           Treffen leben unter <span class="mono">group.lenkstern</span>.
           Pseudonym, ohne Tracking, ohne Datenverkauf.
         </p>
         <div class="door-cta">
+          <a href="https://dein.lenkstern.eu/community/start" class="btn btn--primary" rel="noopener">
+            Community beitreten <span class="arrow">→</span>
+          </a>
           <a href="https://adaption.lenkstern.eu/community/anbieten" class="btn btn--ghost" rel="noopener">
             Community gründen <span class="arrow">→</span>
           </a>
