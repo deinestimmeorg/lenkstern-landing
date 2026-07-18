@@ -28,6 +28,7 @@
     --c-shg:       #38bdf8;
     --c-therapie:  #14b8a6;
     --c-reha:      #b87333;
+    --c-adaption:  #e8943a;
     --c-community: #0ea5e9;
     --c-markt:     #f59e0b;
     --c-verband:   #c084fc;
@@ -1327,6 +1328,125 @@
     margin-left: auto;
   }
 
+  /* ====================================
+     Einstieg — Wo stehst du?
+     ==================================== */
+  .doors {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .door {
+    display: flex; flex-direction: column;
+    padding: clamp(24px, 3vw, 32px);
+    border-radius: 16px;
+    border: 1.5px solid color-mix(in srgb, var(--c, var(--plasma)) 34%, rgba(255,255,255,0.12));
+    background: rgba(255,255,255,0.02);
+    box-shadow: 0 24px 64px -24px rgba(0,0,0,0.55);
+  }
+  .door-title {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 22px; font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--indigo-fg-2);
+  }
+  .door-title .swatch {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: var(--c, var(--plasma));
+    box-shadow: 0 0 14px var(--c, var(--plasma));
+  }
+  .door-quote {
+    margin-top: 14px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--indigo-fg-2);
+  }
+  .door-body {
+    margin-top: 12px;
+    font-size: 16px; line-height: 1.6;
+    color: #94a3b8;
+    text-wrap: pretty;
+    flex: 1;
+  }
+  .door-cta { margin-top: 24px; }
+  .door-host {
+    margin-top: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: #cbd5e1;
+  }
+  .door-host .sub { color: var(--plasma); }
+  .einstieg-extra {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .einstieg-card {
+    padding: clamp(24px, 3vw, 32px);
+    border-radius: 16px;
+    border: 1px solid var(--indigo-border);
+    background: rgba(15,23,42,0.35);
+  }
+  .einstieg-card h3 {
+    font-size: clamp(19px, 2vw, 22px);
+    font-weight: 500; letter-spacing: -0.015em;
+    color: var(--indigo-fg-2);
+  }
+  .einstieg-card p {
+    margin-top: 12px;
+    font-size: 16px; line-height: 1.6;
+    color: #94a3b8;
+    text-wrap: pretty;
+  }
+  .einstieg-card .door-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  @media (max-width: 980px) {
+    .doors { grid-template-columns: 1fr; }
+    .einstieg-extra { grid-template-columns: 1fr; }
+  }
+
+  /* Kurz-Ansicht — Türen */
+  .short-doors {
+    margin-top: 24px;
+    display: grid;
+    gap: 14px;
+  }
+  .short-door {
+    display: block;
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 1px solid color-mix(in srgb, var(--c, var(--plasma)) 34%, rgba(255,255,255,0.12));
+    background: rgba(255,255,255,0.02);
+    color: inherit;
+    text-decoration: none;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .short-door:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: color-mix(in srgb, var(--c, var(--plasma)) 60%, rgba(255,255,255,0.12));
+  }
+  .short-door b {
+    display: block;
+    font-size: 17px; font-weight: 600;
+    color: var(--indigo-fg-2);
+  }
+  .short-door .short-door-quote {
+    display: block;
+    margin-top: 4px;
+    font-style: italic;
+    font-size: 15px;
+    color: #94a3b8;
+  }
+  .short-door .short-door-host {
+    display: block;
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--plasma);
+  }
+
   .foot-reset {
     margin-top: 12px;
     font-size: 12px;
@@ -1387,13 +1507,14 @@
       <span class="brand-word">lenkstern</span>
     </a>
     <nav class="primary">
+      <a href="#einstieg" class="hide-sm">Einstieg</a>
       <a href="#was" class="hide-sm">Lenkstern</a>
       <a href="#module" class="hide-sm">Module</a>
       <a href="#haltung" class="hide-sm">Haltung</a>
       <a href="#recht" class="hide-sm">Recht</a>
       <a href="#offen" class="hide-sm">Offen gebaut</a>
       <a href="#stand" class="hide-sm">Stand</a>
-      <a href="https://dein.lenkstern.eu" class="cta" rel="noopener">Test-App →</a>
+      <a href="https://dein.lenkstern.eu" class="cta" rel="noopener">dein.lenkstern →</a>
     </nav>
     <div class="mode-switcher" role="group" aria-label="Ansicht wechseln">
       <button type="button" id="mode-short" aria-pressed="false">Kurz</button>
@@ -1457,6 +1578,36 @@
         </div>
 
         <div class="short-section">
+          <h2>Wo stehst du gerade?</h2>
+          <p>
+            Du fängst da an, wo du gerade stehst, und rutschst einfach weiter,
+            wenn dein Weg weitergeht.
+          </p>
+          <div class="short-doors">
+            <a class="short-door" style="--c: var(--c-reha);" href="https://reha.lenkstern.eu" rel="noopener">
+              <b>Reha</b>
+              <span class="short-door-quote">„Ich bin in der Reha, oder sie steht bevor."</span>
+              <span class="short-door-host">reha.lenkstern.eu →</span>
+            </a>
+            <a class="short-door" style="--c: var(--c-adaption);" href="https://adaption.lenkstern.eu" rel="noopener">
+              <b>Adaption</b>
+              <span class="short-door-quote">„Ich bin im Adaptionshaus, mitten im Übergang."</span>
+              <span class="short-door-host">adaption.lenkstern.eu →</span>
+            </a>
+            <a class="short-door" style="--c: var(--c-kern);" href="https://dein.lenkstern.eu" rel="noopener">
+              <b>Draußen</b>
+              <span class="short-door-quote">„Ich bin zu Hause. Betreut, in Nachsorge oder frei."</span>
+              <span class="short-door-host">dein.lenkstern.eu →</span>
+            </a>
+          </div>
+          <p>
+            <b>dein.lenkstern</b> gehört dir, egal wo du stehst. Es wandert mit:
+            aus der Reha in die Adaption, aus der Adaption nach Hause. Von dort
+            gründest du Communities, Gruppen leben unter group.lenkstern (im Aufbau).
+          </p>
+        </div>
+
+        <div class="short-section">
           <h2>Jetzt mitbauen</h2>
           <p>
             Lenkstern entsteht mit den ersten Testerinnen und Testern. Mit Betroffenen, die ehrlich
@@ -1465,7 +1616,7 @@
           </p>
           <div class="short-cta">
             <a href="https://dein.lenkstern.eu" class="btn btn--primary" rel="noopener">
-              Zur Test-App <span class="arrow">→</span>
+              Zu deinem Bereich <span class="arrow">→</span>
             </a>
             <a href="mailto:tester@lenkstern.eu?subject=Lenkstern%20%C2%B7%20Tester%20werden" class="btn btn--ghost">
               Tester werden <span class="arrow">→</span>
@@ -1504,12 +1655,12 @@
       <p class="lede">
         Lenkstern ist eine föderative, EU-souveräne Plattform für die
         Generationen, die ihren Alltag nach einer Reha neu zusammenschrauben —
-        und für jene, die mit Lenkstern alt werden. Sieben Module,
+        und für jene, die mit Lenkstern alt werden. Acht Module,
         ein Horizont.
       </p>
       <div class="hero-ctas">
-        <a href="https://dein.lenkstern.eu" class="btn btn--primary" rel="noopener">
-          Zur Test-App <span class="arrow">→</span>
+        <a href="#einstieg" class="btn btn--primary">
+          Finde deinen Einstieg <span class="arrow">→</span>
         </a>
         <a href="#kontakt" class="btn btn--ghost">
           Kontakt aufnehmen
@@ -1535,6 +1686,95 @@
       <div class="row"><dt>Rechtsrahmen</dt><dd>DSGVO Art. 9 · § 203 StGB</dd></div>
       <div class="row"><dt>Status</dt><dd>Pilot Reha &middot; 06 / 2026</dd></div>
     </dl>
+  </div>
+</section>
+
+<!-- ============= EINSTIEG / WO STEHST DU ============= -->
+<section class="block" id="einstieg">
+  <div class="container">
+    <div class="section-label">Dein Einstieg</div>
+    <h2 class="section-h">Wo stehst du gerade?</h2>
+    <p class="section-sub">
+      Lenkstern begleitet den ganzen Weg. Du fängst da an, wo du gerade stehst,
+      und rutschst einfach weiter, wenn dein Weg weitergeht.
+    </p>
+
+    <div class="doors">
+      <div class="door" style="--c: var(--c-reha);">
+        <div class="door-title"><span class="swatch"></span> Reha</div>
+        <p class="door-quote">„Ich bin in der Reha, oder sie steht bevor."</p>
+        <p class="door-body">
+          Die Wochen in der Klinik sind geschützt, aber weit weg von zu Hause.
+          Hier findest du deinen Tagesplan, deine Gruppen und schon jetzt die
+          Menschen, die dich nach der Entlassung erwarten.
+        </p>
+        <div class="door-cta">
+          <a href="https://reha.lenkstern.eu" class="btn btn--primary" rel="noopener">
+            In die Reha-App <span class="arrow">→</span>
+          </a>
+          <div class="door-host mono">reha<span class="sub">.lenkstern.eu</span></div>
+        </div>
+      </div>
+
+      <div class="door" style="--c: var(--c-adaption);">
+        <div class="door-title"><span class="swatch"></span> Adaption</div>
+        <p class="door-quote">„Ich bin im Adaptionshaus, mitten im Übergang."</p>
+        <p class="door-body">
+          Adaption heißt: Alltag üben, solange noch jemand da ist. Wohnung suchen,
+          arbeiten, eigene Wege gehen. Die App hält Haus, Mitbewohner und Termine
+          zusammen, und den Draht zum Team, wenn ein Tag kippt.
+        </p>
+        <div class="door-cta">
+          <a href="https://adaption.lenkstern.eu" class="btn btn--primary" rel="noopener">
+            In die Adaptions-App <span class="arrow">→</span>
+          </a>
+          <div class="door-host mono">adaption<span class="sub">.lenkstern.eu</span></div>
+        </div>
+      </div>
+
+      <div class="door" style="--c: var(--c-kern);">
+        <div class="door-title"><span class="swatch"></span> Draußen</div>
+        <p class="door-quote">„Ich bin zu Hause. Betreut, in Nachsorge oder frei."</p>
+        <p class="door-body">
+          Kein Klinikprogramm mehr, aber die Verbindung bleibt. Dein Bereich hält
+          deine Anker, deine Termine und die Menschen, die du unterwegs
+          kennengelernt hast. Von hier aus wechselst du jederzeit in die Community.
+        </p>
+        <div class="door-cta">
+          <a href="https://dein.lenkstern.eu" class="btn btn--primary" rel="noopener">
+            Zu deinem Bereich <span class="arrow">→</span>
+          </a>
+          <div class="door-host mono">dein<span class="sub">.lenkstern.eu</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="einstieg-extra">
+      <div class="einstieg-card">
+        <h3>Dein Stern wandert mit.</h3>
+        <p>
+          <span class="mono">dein.lenkstern</span> gehört dir, egal wo du stehst.
+          Wer in der Reha anfängt, nimmt es mit in die Adaption. Wer die Adaption
+          beendet, nimmt es mit nach Hause. Nichts fängt bei null an,
+          niemand verliert seine Leute.
+        </p>
+      </div>
+      <div class="einstieg-card">
+        <h3>Gemeinsam weiterbauen.</h3>
+        <p>
+          Über <span class="mono">dein.lenkstern</span> kann jeder eine Community
+          gründen: einen Ort für Menschen, die dasselbe tragen. Gruppen mit festen
+          Treffen leben unter <span class="mono">group.lenkstern</span>.
+          Pseudonym, ohne Tracking, ohne Datenverkauf.
+        </p>
+        <div class="door-cta">
+          <a href="https://dein.lenkstern.eu" class="btn btn--ghost" rel="noopener">
+            Community gründen <span class="arrow">→</span>
+          </a>
+          <span class="module-status">group · im Aufbau</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1572,7 +1812,7 @@
 <section class="block" id="module">
   <div class="container">
     <div class="section-label">Module</div>
-    <h2 class="section-h">Sieben Module, ein Horizont.</h2>
+    <h2 class="section-h">Acht Module, ein Horizont.</h2>
     <p class="section-sub">
       Jedes Modul hat seine eigene Adresse und Verantwortung.
     </p>
@@ -1580,23 +1820,30 @@
     <div class="modules">
       <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-reha);"></span> Reha</div>
-        <p class="module-desc">Begleitung während und nach der stationären Reha-Kur.</p>
+        <p class="module-desc">Begleitung während der stationären Reha — Tagesplan, Gruppen, Menschen.</p>
         <div class="module-host mono">reha<span class="sub">.lenkstern.eu</span></div>
         <span class="module-status pilot">Pilot 06/2026</span>
       </div>
 
       <div class="module">
+        <div class="module-codename"><span class="swatch" style="--c: var(--c-adaption);"></span> Adaption</div>
+        <p class="module-desc">Der Übergang: Alltag üben im Adaptionshaus, mit dem Team im Rücken.</p>
+        <div class="module-host mono">adaption<span class="sub">.lenkstern.eu</span></div>
+        <span class="module-status now">Läuft</span>
+      </div>
+
+      <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-kern);"></span> Kern</div>
-        <p class="module-desc">Dein pseudonymes Profil — die Basis für alles Weitere.</p>
+        <p class="module-desc">Dein Bereich, der bleibt — für alle draußen, und deine Brücke in die Community.</p>
         <div class="module-host mono">dein<span class="sub">.lenkstern.eu</span></div>
-        <span class="module-status">In Planung</span>
+        <span class="module-status now">Läuft</span>
       </div>
 
       <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-shg);"></span> SHG</div>
         <p class="module-desc">Selbsthilfegruppen — Termine, Austausch, Vernetzung.</p>
         <div class="module-host mono">group<span class="sub">.lenkstern.eu</span></div>
-        <span class="module-status">In Planung</span>
+        <span class="module-status">Im Aufbau</span>
       </div>
 
       <div class="module">
@@ -1608,9 +1855,9 @@
 
       <div class="module">
         <div class="module-codename"><span class="swatch" style="--c: var(--c-community);"></span> Community</div>
-        <p class="module-desc">Betroffene unter sich — pseudonymer Austausch und eigene Angebote, ohne Datenverkauf.</p>
+        <p class="module-desc">Betroffene unter sich — eigene Communities, gegründet über dein.lenkstern, ohne Datenverkauf.</p>
         <div class="module-host mono">community<span class="sub">.lenkstern.eu</span></div>
-        <span class="module-status">In Planung</span>
+        <span class="module-status">Im Aufbau</span>
       </div>
 
       <div class="module">
@@ -1767,6 +2014,12 @@
         <div>Kooperation Rehaklinik · ggf. gGmbH</div>
         <div class="mono">Art. 9 (2) h + SGB V/VI</div>
         <div>Reha-Daten · Katamnese · Verlauf</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-mod"><span class="dot" style="background: var(--c-adaption);"></span> Adaption <span class="rt-host mono">adaption.lenkstern.eu</span></div>
+        <div>Kooperation Adaptionshaus · ggf. gGmbH</div>
+        <div class="mono">Art. 9 (2) h + SGB V/VI</div>
+        <div>Adaptions-Daten · Haus · Termine</div>
       </div>
       <div class="rt-row">
         <div class="rt-mod"><span class="dot" style="background: var(--c-community);"></span> Community <span class="rt-host mono">community.lenkstern.eu</span></div>
@@ -2053,6 +2306,7 @@
           <li><a href="#module">group.lenkstern.eu</a></li>
           <li><a href="#module">therapie.lenkstern.eu</a></li>
           <li><a href="#module">reha.lenkstern.eu</a></li>
+          <li><a href="#module">adaption.lenkstern.eu</a></li>
           <li><a href="#module">community.lenkstern.eu</a></li>
           <li><a href="#module">markt.lenkstern.eu</a></li>
         </ul>
